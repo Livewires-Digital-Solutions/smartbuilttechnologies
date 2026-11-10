@@ -1,0 +1,519 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   SBT design tokens — sourced from Colour System v1.0, Typography System v1.0
+   and Graphic Language v1.0. These are the ONLY values the UI may use.
+   Tailwind's default palette is removed so off-brand colours cannot slip in.
+   ========================================================================== */
+
+@theme {
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-white: #ffffff;
+
+  /* Brand palette */
+  --color-navy: #0c1446;
+  --color-cobalt: #315bdb;
+  --color-sky: #8bbdfb;
+  --color-orange: #ff5200;
+  --color-paper: #f8fafd;
+
+  /* Neutrals */
+  --color-slate-700: #3d4556;
+  --color-slate-500: #6e7787;
+  --color-slate-300: #cbd2df;
+  --color-slate-200: #e3e7ef;
+
+  /* Tints — fills, backgrounds and chart series only, never text */
+  --color-navy-10: #e7e8ed;
+  --color-navy-20: #ced0da;
+  --color-navy-40: #9ea1b5;
+  --color-navy-60: #6d7290;
+  --color-navy-80: #3d436b;
+  --color-cobalt-10: #eaeffb;
+  --color-cobalt-20: #d6def8;
+  --color-cobalt-40: #adbdf1;
+  --color-sky-10: #f3f8ff;
+  --color-sky-20: #e8f2fe;
+  --color-orange-10: #ffeee6;
+  --color-orange-80: #ff7533;
+
+  /* Logo-only values (Colour System p.8) */
+  --color-logo-digital: #1d6bf3;
+  --color-logo-precision: #7cc0fa;
+  --color-logo-foundation-end: #1e64f0;
+
+  /* Status — UI only; orange is never a status colour */
+  --color-success: #13805f;
+  --color-warning: #b7791f;
+  --color-error: #d92d20;
+
+  /* Type — Plus Jakarta Sans only */
+  --font-sans: var(--font-jakarta), system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+
+  /* Seven sizes. Nothing in between. Fluid from 360px to 1440px. */
+  --text-display: clamp(2.75rem, 2.1667rem + 2.5926vw, 4.5rem);
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.025em;
+  --text-display--font-weight: 800;
+
+  --text-h1: clamp(2.125rem, 1.8333rem + 1.2963vw, 3rem);
+  --text-h1--line-height: 1.1;
+  --text-h1--letter-spacing: -0.02em;
+  --text-h1--font-weight: 800;
+
+  --text-h2: clamp(1.625rem, 1.5rem + 0.5556vw, 2rem);
+  --text-h2--line-height: 1.2;
+  --text-h2--letter-spacing: -0.01em;
+  --text-h2--font-weight: 700;
+
+  --text-h3: clamp(1.25rem, 1.2083rem + 0.1852vw, 1.375rem);
+  --text-h3--line-height: 1.3;
+  --text-h3--font-weight: 700;
+
+  --text-lead: clamp(1.125rem, 1.0833rem + 0.1852vw, 1.25rem);
+  --text-lead--line-height: 1.5;
+
+  --text-body: 1rem;
+  --text-body--line-height: 1.55;
+
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.4;
+  --text-caption--letter-spacing: 0.01em;
+
+  --text-overline: 0.8125rem;
+  --text-overline--line-height: 1.4;
+  --text-overline--letter-spacing: 0.2em;
+
+  /* Shape */
+  --radius-card: 14px;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-micro: 160ms;
+  --duration-ui: 240ms;
+  --duration-reveal: 480ms;
+  --duration-hero: 700ms;
+
+  /* Breakpoints (Tailwind defaults plus 3xl for wide editorial spreads) */
+  --breakpoint-3xl: 1720px;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+@layer base {
+  :root {
+    --gutter: 16px;
+    --margin: 20px;
+    --header-h: 64px;
+    --hairline: var(--color-slate-200);
+    color-scheme: light;
+  }
+  @media (min-width: 768px) {
+    :root {
+      --gutter: 24px;
+      --margin: 40px;
+      --header-h: 72px;
+    }
+  }
+  @media (min-width: 1280px) {
+    :root {
+      --gutter: 32px;
+      --margin: 64px;
+      --header-h: 80px;
+    }
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scroll-padding-top: calc(var(--header-h) + 16px);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html:focus-within {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-navy);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: transparent;
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--color-sky);
+    color: var(--color-navy);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-cobalt);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  [data-surface="dark"] :focus-visible,
+  [data-surface="cobalt"] :focus-visible {
+    outline-color: var(--color-white);
+  }
+
+  /* Tabular figures wherever numbers are compared */
+  table,
+  time,
+  dl,
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  img,
+  svg,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+/* ==========================================================================
+   Layout utilities
+   ========================================================================== */
+
+@utility container-x {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: var(--margin);
+}
+
+@utility grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+}
+
+@utility section-y {
+  padding-block: 4rem;
+  @media (min-width: 768px) {
+    padding-block: 6rem;
+  }
+  @media (min-width: 1280px) {
+    padding-block: 8.5rem;
+  }
+}
+
+@utility measure {
+  max-width: 68ch;
+}
+
+/* Surfaces: one place that defines text + hairline colour per background */
+@utility surface-paper {
+  background-color: var(--color-paper);
+  color: var(--color-navy);
+  --hairline: var(--color-slate-200);
+}
+@utility surface-white {
+  background-color: var(--color-white);
+  color: var(--color-navy);
+  --hairline: var(--color-slate-200);
+}
+@utility surface-navy {
+  background-color: var(--color-navy);
+  color: var(--color-white);
+  --hairline: rgb(255 255 255 / 0.14);
+}
+@utility surface-cobalt {
+  background-color: var(--color-cobalt);
+  color: var(--color-white);
+  --hairline: rgb(255 255 255 / 0.22);
+}
+
+/* Midnight depth: navy gradient used behind hero and closing sections */
+@utility bg-midnight-depth {
+  background-color: var(--color-navy);
+  background-image:
+    radial-gradient(120% 90% at 85% 110%, rgb(49 91 219 / 0.32) 0%, transparent 60%),
+    linear-gradient(180deg, #0c1446 0%, #0e1852 100%);
+}
+
+/* Isometric dot lattice (Light field, 4%) — dots on a 30° grid */
+@utility bg-lattice {
+  background-image: radial-gradient(circle at center, rgb(12 20 70 / 0.16) 1px, transparent 1.6px),
+    radial-gradient(circle at center, rgb(12 20 70 / 0.16) 1px, transparent 1.6px);
+  background-size: 28px 16.166px;
+  background-position:
+    0 0,
+    14px 8.083px;
+}
+@utility bg-lattice-inverse {
+  background-image: radial-gradient(circle at center, rgb(255 255 255 / 0.14) 1px, transparent 1.6px),
+    radial-gradient(circle at center, rgb(255 255 255 / 0.14) 1px, transparent 1.6px);
+  background-size: 28px 16.166px;
+  background-position:
+    0 0,
+    14px 8.083px;
+}
+
+/* ==========================================================================
+   Motion — reveal along the 30° axis, once, CSS-only.
+   Content is never hidden when scroll timelines are unsupported.
+   ========================================================================== */
+
+@keyframes reveal-30 {
+  from {
+    opacity: 0;
+    translate: -6px 10px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal-30 linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+  }
+}
+
+/* Photography grade (Graphic Language p.10): −20% saturation, +5% contrast */
+@utility grade {
+  filter: saturate(0.8) contrast(1.05);
+}
+
+/* ==========================================================================
+   Logo tones (Brand Guidelines p.8). Class rules override SVG fill attributes.
+   ========================================================================== */
+
+[data-logo="inverse"] .lg-foundation,
+[data-logo="inverse"] .lg-wordmark,
+[data-logo="inverse"] .lg-descriptor {
+  fill: #ffffff;
+}
+[data-logo="inverse"] .lg-divider {
+  stroke: rgb(255 255 255 / 0.35);
+}
+
+[data-logo="mono"] .lg-foundation,
+[data-logo="mono"] .lg-wordmark,
+[data-logo="mono"] .lg-descriptor {
+  fill: currentColor;
+}
+[data-logo="mono"] .lg-digital {
+  fill: currentColor;
+  fill-opacity: 0.62;
+}
+[data-logo="mono"] .lg-precision {
+  fill: currentColor;
+  fill-opacity: 0.36;
+}
+[data-logo="mono"] .lg-integration {
+  fill: currentColor;
+  fill-opacity: 0.8;
+}
+[data-logo="mono"] .lg-divider {
+  stroke: currentColor;
+  stroke-opacity: 0.3;
+}
+
+/* ==========================================================================
+   Exploded symbol — layers move along the isometric 30° axis.
+   Assemble: each pathway rises into place from the lower left, orange last.
+   Drift: as the page scrolls, inner pathways separate up and to the right.
+   ========================================================================== */
+
+.xs-foundation { --d: 8; --s: 0; }
+.xs-digital { --d: 16; --s: 5; }
+.xs-precision { --d: 24; --s: 10; }
+.xs-integration { --d: 34; --s: 15; }
+
+@keyframes xs-in {
+  from {
+    opacity: 0;
+    translate: calc(var(--d) * -0.866px) calc(var(--d) * 0.5px);
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@keyframes xs-out {
+  to {
+    transform: translate(calc(var(--s) * 0.866px), calc(var(--s) * -0.5px));
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .xs-assemble .xs-part {
+    animation: xs-in var(--duration-hero) var(--ease-out) both;
+    animation-delay: calc(var(--i) * 110ms + 120ms);
+  }
+  @supports (animation-timeline: scroll()) {
+    .xs-drift .xs-part {
+      animation:
+        xs-in var(--duration-hero) var(--ease-out) both,
+        xs-out linear both;
+      animation-delay: calc(var(--i) * 110ms + 120ms), 0s;
+      animation-timeline: auto, scroll(root);
+      animation-range: normal, 0 70vh;
+    }
+  }
+}
+
+/* ==========================================================================
+   Site header
+   ========================================================================== */
+
+.site-header {
+  color: var(--color-navy);
+  background-color: var(--color-paper);
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color var(--duration-ui) var(--ease-out),
+    color var(--duration-ui) var(--ease-out),
+    border-color var(--duration-ui) var(--ease-out),
+    translate 320ms var(--ease-out);
+}
+.site-header[data-scrolled="true"],
+.site-header[data-open="true"] {
+  border-bottom-color: var(--color-slate-200);
+}
+.site-header[data-hidden="true"] {
+  translate: 0 -100%;
+}
+.header-logo .sbt-logo {
+  width: 136px;
+}
+@media (min-width: 1280px) {
+  .header-logo .sbt-logo {
+    width: 156px;
+  }
+}
+
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  height: 2.75rem;
+  align-items: center;
+  padding-inline: 0.75rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  border-radius: var(--radius-pill);
+  transition: opacity var(--duration-micro) var(--ease-out);
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 0.55rem;
+  height: 1.5px;
+  border-radius: 2px;
+  background: currentColor;
+  scale: 0 1;
+  transform-origin: left;
+  transition: scale var(--duration-ui) var(--ease-out);
+}
+.nav-link:hover::after,
+.nav-link[data-active="true"]::after,
+.nav-link[aria-expanded="true"]::after {
+  scale: 1 1;
+}
+
+/* Transparent + inverse over a dark opening section, until scrolled or opened */
+body:has(#main > [data-header="dark"]:first-child) .site-header[data-scrolled="false"][data-open="false"] {
+  background-color: transparent;
+  color: var(--color-white);
+}
+body:has(#main > [data-header="dark"]:first-child) .site-header[data-scrolled="false"][data-open="false"] :is(.lg-foundation, .lg-wordmark, .lg-descriptor) {
+  fill: #ffffff;
+}
+body:has(#main > [data-header="dark"]:first-child) .site-header[data-scrolled="false"][data-open="false"] .lg-divider {
+  stroke: rgb(255 255 255 / 0.35);
+}
+body:has(#main > [data-header="dark"]:first-child) .site-header[data-scrolled="false"][data-open="false"] .header-cta {
+  background-color: var(--color-white);
+  color: var(--color-navy);
+}
+
+/* Mobile sheet open: the bar joins the navy sheet */
+.site-header[data-mobile="true"] {
+  background-color: var(--color-navy);
+  color: var(--color-white);
+  border-bottom-color: rgb(255 255 255 / 0.14);
+}
+.site-header[data-mobile="true"] :is(.lg-foundation, .lg-wordmark, .lg-descriptor) {
+  fill: #ffffff;
+}
+.site-header[data-mobile="true"] .header-cta {
+  background-color: var(--color-white);
+  color: var(--color-navy);
+}
+
+/* Services panel */
+.services-panel {
+  background-color: var(--color-paper);
+  color: var(--color-navy);
+  border-bottom: 1px solid var(--color-slate-200);
+  box-shadow: 0 24px 48px -32px rgb(12 20 70 / 0.28);
+  transition:
+    opacity var(--duration-ui) var(--ease-out),
+    translate var(--duration-ui) var(--ease-out),
+    visibility 0s linear var(--duration-ui);
+}
+.services-panel[data-state="closed"] {
+  opacity: 0;
+  translate: 0 -6px;
+  visibility: hidden;
+  pointer-events: none;
+}
+.services-panel[data-state="open"] {
+  transition-delay: 0s;
+}
+
+/* Mobile sheet */
+.mobile-sheet {
+  background-color: var(--color-navy);
+  color: var(--color-white);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .mobile-sheet[data-state="open"] {
+    animation: sheet-in var(--duration-ui) var(--ease-out);
+  }
+}
+@keyframes sheet-in {
+  from {
+    opacity: 0;
+    translate: 0 -8px;
+  }
+}
+
+/* Italic is for quotes and references only (Typography System p.3) */
+@utility quote {
+  font-family: var(--font-jakarta-italic), var(--font-jakarta), system-ui, sans-serif;
+  font-style: italic;
+  font-weight: 400;
+}
