@@ -18,7 +18,7 @@ export function Accordion({
     <div className={cn("border-t border-[var(--hairline)]", className)}>
       {items.map((item) => (
         <details key={item.id} name={name} className="group border-b border-[var(--hairline)]">
-          <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-5 text-h3 font-bold [&::-webkit-details-marker]:hidden">
+          <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-5 text-h3 [&::-webkit-details-marker]:hidden">
             <span>{item.question}</span>
             <span
               aria-hidden="true"

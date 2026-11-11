@@ -18,7 +18,7 @@ export function SiteFooter() {
               <Tagline />
             </p>
             <p className="max-w-[34ch] text-sm text-white/64">
-              A {site.group} company. BIM, reality capture, digital twins and facility systems, delivered from Chennai.
+              The production hub of {site.group}. BIM, reality capture, digital twins and facility systems, delivered from our newly opened production centre in Chennai.
             </p>
           </div>
 
@@ -65,7 +65,7 @@ export function SiteFooter() {
 
         <div className="flex flex-col gap-3 border-t border-[var(--hairline)] py-6 text-caption text-white/56 md:flex-row md:items-center md:justify-between">
           <p>
-            © {COPYRIGHT_YEAR} {site.name}. A {site.group} company.
+            © {COPYRIGHT_YEAR} {site.name}. The production hub of {site.group}.
           </p>
           <ul className="flex items-center gap-5">
             <li>ISO 19650 certified delivery</li>

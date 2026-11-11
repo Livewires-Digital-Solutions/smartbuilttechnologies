@@ -56,41 +56,59 @@ export interface Accreditation {
   title: string;
   standard: string;
   scope: string;
+  /** The legal entity named on the certificate */
+  holder: string;
+  /** True when the certificate is in TXG KSA's own name (Riyadh = KSA = Saudi) */
+  heldByKsa: boolean;
   category: AccreditationCategory;
   image?: { src: string; width: number; height: number };
 }
 
-/** TXG lists 15 (5 per category); only the four ISO certificates are published. */
+/**
+ * TXG lists 15 (5 per category); only four certificates are published. Each is
+ * labelled with what is printed on the document, not with TXG's file names:
+ * the files TXG named "ISO 19650-1" and "ISO 19650-2" are ISO 27001:2022 and
+ * ISO 9001:2015, and the one named "ISO 9001" is ISO 45001:2018.
+ * No ISO 19650 certificate has been supplied (PLAN.md §1 #5).
+ */
 export const accreditations: Accreditation[] = [
   {
-    id: "iso-19650-1",
-    title: "ISO 19650-1:2018",
-    standard: "Organisation and digitisation of information about buildings — concepts and principles",
-    scope: "Information management using BIM",
+    id: "iso-27001",
+    title: "ISO 27001:2022",
+    standard: "Information security management systems",
+    scope: "Information security",
+    holder: "International TXG Pvt. Ltd., Kerala",
+    heldByKsa: false,
     category: "iso",
-    image: { src: "/assets/certificates/iso-19650-1.png", width: 960, height: 1396 },
-  },
-  {
-    id: "iso-19650-2",
-    title: "ISO 19650-2:2018",
-    standard: "Information management during the delivery phase of assets",
-    scope: "BIM delivery phase",
-    category: "iso",
-    image: { src: "/assets/certificates/iso-19650-2.png", width: 473, height: 688 },
+    image: { src: "/assets/certificates/iso-27001.png", width: 960, height: 1396 },
   },
   {
     id: "iso-9001",
     title: "ISO 9001:2015",
     standard: "Quality management systems",
     scope: "Quality management",
+    holder: "International TXG Pvt. Ltd., Kerala",
+    heldByKsa: false,
     category: "iso",
-    image: { src: "/assets/certificates/iso-9001.png", width: 495, height: 691 },
+    image: { src: "/assets/certificates/iso-9001.png", width: 473, height: 688 },
+  },
+  {
+    id: "iso-45001",
+    title: "ISO 45001:2018",
+    standard: "Occupational health and safety management systems",
+    scope: "Health and safety",
+    holder: "Technical Xperts International Ltd., Riyadh",
+    heldByKsa: true,
+    category: "iso",
+    image: { src: "/assets/certificates/iso-45001.png", width: 495, height: 691 },
   },
   {
     id: "iso-14001",
     title: "ISO 14001:2015",
     standard: "Environmental management systems",
     scope: "Environmental management",
+    holder: "Technical Xperts International Ltd., Riyadh",
+    heldByKsa: true,
     category: "iso",
     image: { src: "/assets/certificates/iso-14001.png", width: 495, height: 691 },
   },

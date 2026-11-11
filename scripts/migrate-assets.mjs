@@ -43,9 +43,9 @@ const PARTNERS = Array.from({ length: 11 }, (_, i) => [
 ]);
 
 const CERTS = [
-  ["ISO CERTIFICATIONS.png", "iso-19650-1"],
-  ["ISO CERTIFICATIONS 2.png", "iso-19650-2"],
-  ["ISO CERTIFICATION 3.png", "iso-9001"],
+  ["ISO CERTIFICATIONS.png", "iso-27001"],
+  ["ISO CERTIFICATIONS 2.png", "iso-9001"],
+  ["ISO CERTIFICATION 3.png", "iso-45001"],
   ["ISO CERTIFICATION 4.png", "iso-14001"],
 ].map(([f, name]) => [`/assets/txg-certificates/${f}`, "certificates", name]);
 

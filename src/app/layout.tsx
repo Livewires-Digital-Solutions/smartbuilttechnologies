@@ -1,14 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { IBM_Plex_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import { Logo } from "@/components/brand/Logo";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SkipLink } from "@/components/ui/Breadcrumbs";
 import { site } from "@/content/site";
 import { organizationJsonLd, JsonLd } from "@/lib/jsonld";
 import "./globals.css";
 
-/** Plus Jakarta Sans — the only typeface (Typography System v1.0). Variable 200–800, self-hosted. */
+/** Plus Jakarta Sans — what we say: headlines, copy, UI (Typography System v1.0). Variable 200–800, self-hosted. */
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-jakarta",
@@ -22,6 +23,17 @@ const jakartaItalic = Plus_Jakarta_Sans({
   variable: "--font-jakarta-italic",
   display: "swap",
   preload: false,
+});
+
+/**
+ * IBM Plex Mono — what we measure: labels, captions, figure numbers, specs and
+ * standards. Never headings or running text (Design direction v2, §3).
+ */
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-plex-mono",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -50,14 +62,16 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-IN" className={`${jakarta.variable} ${jakartaItalic.variable}`}>
+    <html lang="en-IN" className={`${jakarta.variable} ${jakartaItalic.variable} ${plexMono.variable}`}>
       <body>
         <SkipLink />
         <SiteHeader logo={<Logo lockup="horizontal" title={null} />} />
-        <main id="main" tabIndex={-1} className="outline-none">
-          {children}
-        </main>
-        <SiteFooter />
+        <SmoothScroll>
+          <main id="main" tabIndex={-1} className="outline-none">
+            {children}
+          </main>
+          <SiteFooter />
+        </SmoothScroll>
         <JsonLd data={organizationJsonLd()} />
       </body>
     </html>

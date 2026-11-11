@@ -34,7 +34,8 @@ export interface Project {
   services: ServiceSlug[];
   scope: string[];
   image: ProjectImage;
-  deliveredBy: "TXG Group" | "SBT";
+  /** Every project is shown as associated with TXG KSA, whose track record Smart Built carries. */
+  deliveredBy: "TXG KSA";
   featured?: boolean;
 }
 
@@ -67,7 +68,7 @@ export const projects: Project[] = [
       "Systems modelled to LOD 300, 350, 400 and 500",
     ],
     image: img("neom-bay-airport-t1-t2.jpg", 572, 586),
-    deliveredBy: "TXG Group",
+    deliveredBy: "TXG KSA",
     featured: true,
   },
   {
@@ -80,7 +81,7 @@ export const projects: Project[] = [
     services: ["digital-twin", "bim", "asset-management"],
     scope: ["Digital twin implementation", "Operational BIM development", "Asset information model"],
     image: img("king-abdullah-financial-district.webp", 1247, 935),
-    deliveredBy: "TXG Group",
+    deliveredBy: "TXG KSA",
     featured: true,
   },
   {
@@ -99,7 +100,7 @@ export const projects: Project[] = [
       "Asset information layouts extracted from the model",
     ],
     image: img("sports-boulevard.webp", 572, 586),
-    deliveredBy: "TXG Group",
+    deliveredBy: "TXG KSA",
     featured: true,
   },
   {
@@ -112,7 +113,7 @@ export const projects: Project[] = [
     services: ["bim"],
     scope: ["BIM model development", "Construction documents", "ELV shop drawings"],
     image: img("riyadh-metro.webp", 1247, 935),
-    deliveredBy: "TXG Group",
+    deliveredBy: "TXG KSA",
   },
   {
     slug: "neom-oxagon",
@@ -127,7 +128,7 @@ export const projects: Project[] = [
       "Electrical shop drawings for a 246,186 m² modular factory",
     ],
     image: img("neom-oxagon.jpg", 293, 300),
-    deliveredBy: "TXG Group",
+    deliveredBy: "TXG KSA",
   },
   {
     slug: "shura-hc1-the-tail-marsa-village",
@@ -143,7 +144,7 @@ export const projects: Project[] = [
       "On-site project coordinator",
     ],
     image: img("shura-hc1-the-tail-marsa-village.jpg", 293, 300),
-    deliveredBy: "TXG Group",
+    deliveredBy: "TXG KSA",
   },
   {
     slug: "al-nahda-entertainment-complex",
@@ -155,7 +156,7 @@ export const projects: Project[] = [
     services: ["bim"],
     scope: ["BIM professionals staffing"],
     image: img("al-nahda-entertainment-complex.webp", 572, 586),
-    deliveredBy: "TXG Group",
+    deliveredBy: "TXG KSA",
   },
   {
     slug: "melbourne-airport",
@@ -167,7 +168,7 @@ export const projects: Project[] = [
     services: ["bim"],
     scope: STOWE_SCOPE,
     image: img("melbourne-airport.webp", 572, 586),
-    deliveredBy: "TXG Group",
+    deliveredBy: "TXG KSA",
   },
   {
     slug: "chadstone-shopping-centre",
@@ -179,7 +180,7 @@ export const projects: Project[] = [
     services: ["bim"],
     scope: STOWE_SCOPE,
     image: img("chadstone-shopping-center.webp", 572, 586),
-    deliveredBy: "TXG Group",
+    deliveredBy: "TXG KSA",
   },
   {
     slug: "banksia-csl",
@@ -191,7 +192,7 @@ export const projects: Project[] = [
     services: ["bim"],
     scope: STOWE_SCOPE,
     image: img("banksia-csl.webp", 572, 586),
-    deliveredBy: "TXG Group",
+    deliveredBy: "TXG KSA",
   },
   {
     slug: "thomas-embling-hospital",
@@ -203,7 +204,7 @@ export const projects: Project[] = [
     services: ["bim"],
     scope: STOWE_SCOPE,
     image: img("thomas-embling-hospital.webp", 572, 586),
-    deliveredBy: "TXG Group",
+    deliveredBy: "TXG KSA",
   },
   {
     slug: "microsoft-data-center-mel07",
@@ -215,7 +216,7 @@ export const projects: Project[] = [
     services: ["bim"],
     scope: STOWE_SCOPE,
     image: img("microsoft-data-center-mel07.webp", 572, 586),
-    deliveredBy: "TXG Group",
+    deliveredBy: "TXG KSA",
   },
   {
     slug: "geelong-convention-and-event-centre",
@@ -227,7 +228,7 @@ export const projects: Project[] = [
     services: ["bim"],
     scope: STOWE_SCOPE,
     image: img("geelong-convention-event-center.webp", 572, 586),
-    deliveredBy: "TXG Group",
+    deliveredBy: "TXG KSA",
   },
   {
     slug: "airtrunk-shell-hjkl",
@@ -239,7 +240,7 @@ export const projects: Project[] = [
     services: ["bim"],
     scope: STOWE_SCOPE,
     image: img("airtrunk-shell-hjkl.webp", 572, 586),
-    deliveredBy: "TXG Group",
+    deliveredBy: "TXG KSA",
   },
   {
     slug: "king-salman-park",
@@ -251,7 +252,7 @@ export const projects: Project[] = [
     services: ["bim"],
     scope: ["Tendering support"],
     image: img("king-salman-park.webp", 1247, 935),
-    deliveredBy: "TXG Group",
+    deliveredBy: "TXG KSA",
   },
   {
     slug: "jeddah-tower",
@@ -263,7 +264,7 @@ export const projects: Project[] = [
     services: ["4d-simulation", "bim"],
     scope: ["4D construction simulation", "3D space coordination"],
     image: img("jeddah-tower.jpg", 572, 586),
-    deliveredBy: "TXG Group",
+    deliveredBy: "TXG KSA",
   },
   {
     slug: "hegra-boutique-hotel",
@@ -275,7 +276,7 @@ export const projects: Project[] = [
     services: ["bim"],
     scope: ["BIM conversion", "ArchiCAD to Revit conversion of all architectural drawings"],
     image: img("hegra-boutique-hotel.webp", 1247, 935),
-    deliveredBy: "TXG Group",
+    deliveredBy: "TXG KSA",
   },
   {
     slug: "king-abdulaziz-international-airport",
@@ -293,7 +294,7 @@ export const projects: Project[] = [
       "CAD standardisation",
     ],
     image: img("king-abdulaziz-international-airport.webp", 1247, 935),
-    deliveredBy: "TXG Group",
+    deliveredBy: "TXG KSA",
   },
   {
     slug: "tadawul-tower",
@@ -311,7 +312,7 @@ export const projects: Project[] = [
       "2D drawings extracted from the model for CSD production",
     ],
     image: img("tadawul-tower.webp", 1247, 935),
-    deliveredBy: "TXG Group",
+    deliveredBy: "TXG KSA",
   },
   {
     slug: "al-moosa-rehabilitation-hospital",
@@ -329,7 +330,7 @@ export const projects: Project[] = [
       "2D drawings extracted from the model for CSD production",
     ],
     image: img("al-moosa-rehabilitation-hospital.jpg", 572, 586),
-    deliveredBy: "TXG Group",
+    deliveredBy: "TXG KSA",
   },
   {
     slug: "six-senses-hotel-wadi-safar",
@@ -344,7 +345,7 @@ export const projects: Project[] = [
       "LOD 400 and LOD 500 modelling",
     ],
     image: img("six-senses-hotel-wadi-safar.jpg", 1691, 951),
-    deliveredBy: "TXG Group",
+    deliveredBy: "TXG KSA",
   },
   {
     slug: "jeddah-opera-house",
@@ -356,7 +357,7 @@ export const projects: Project[] = [
     services: ["reality-capture"],
     scope: ["LiDAR scanning"],
     image: img("jeddah-opera-house.jpg", 1500, 1000),
-    deliveredBy: "TXG Group",
+    deliveredBy: "TXG KSA",
   },
 ];
 

@@ -11,7 +11,7 @@ export type ButtonVariant = "signal" | "primary" | "inverse" | "outline" | "outl
 type Size = "md" | "sm";
 
 const base =
-  "group/btn inline-flex items-center justify-center gap-2.5 rounded-[var(--radius-pill)] font-semibold whitespace-nowrap select-none " +
+  "group/btn inline-flex items-center justify-center gap-2.5 rounded-[var(--radius-button)] font-semibold whitespace-nowrap select-none " +
   "transition-[background-color,color,border-color,box-shadow] duration-[var(--duration-micro)] ease-[var(--ease-out)] " +
   "disabled:pointer-events-none disabled:opacity-50";
 

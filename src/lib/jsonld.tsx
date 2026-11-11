@@ -68,3 +68,37 @@ export function faqJsonLd(items: { question: string; answer: string }[]): Json {
     })),
   };
 }
+
+/** Home page: the website, and the business as a professional service with its parent. */
+export function homeJsonLd(): Json[] {
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": `${site.url}/#website`,
+      url: site.url,
+      name: site.name,
+      inLanguage: "en-IN",
+      publisher: { "@id": `${site.url}/#organization` },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "@id": `${site.url}/#service`,
+      name: site.name,
+      url: site.url,
+      description: site.description,
+      areaServed: "Worldwide",
+      address: { "@type": "PostalAddress", addressLocality: "Chennai", addressRegion: "Tamil Nadu", addressCountry: "IN" },
+      parentOrganization: { "@type": "Organization", name: site.group, url: site.groupUrl },
+      serviceType: [
+        "BIM modelling",
+        "Scan to BIM",
+        "Digital twin",
+        "CAFM implementation",
+        "4D construction simulation",
+        "Asset management systems",
+      ],
+    },
+  ];
+}

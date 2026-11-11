@@ -175,12 +175,13 @@ export function SiteHeader({ logo, contactHref = "/contact" }: { logo: ReactNode
         </nav>
 
         <div className="flex items-center gap-2">
-          <ButtonLink href={contactHref} variant="primary" size="sm" icon={null} className="header-cta hidden sm:inline-flex">
-            Get in touch
-          </ButtonLink>
+          <Link href={contactHref} className="header-cta hidden sm:inline-flex">
+            <span>Start a project</span>
+            <Icon name="arrow-up-right" size={16} />
+          </Link>
           <button
             type="button"
-            className="menu-toggle inline-flex h-11 items-center gap-2 rounded-[var(--radius-pill)] px-3 text-sm font-semibold lg:hidden"
+            className="menu-toggle inline-flex h-11 items-center gap-2 px-3 text-sm font-semibold lg:hidden"
             aria-expanded={mobileOpen}
             aria-controls={mobileId}
             onClick={() => {
