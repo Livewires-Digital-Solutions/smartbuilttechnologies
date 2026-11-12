@@ -7,7 +7,7 @@ import { useEffect, useRef } from "react";
  * value is in the HTML from the start, so crawlers, no-JS visitors and reduced
  * motion all see the real number.
  */
-export function CountUp({ to, className }: { to: number; className?: string }) {
+export function CountUp({ to, suffix = "", className }: { to: number; suffix?: string; className?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
@@ -23,10 +23,10 @@ export function CountUp({ to, className }: { to: number; className?: string }) {
         const tick = (now: number) => {
           const k = Math.min(1, (now - t0) / dur);
           const eased = 1 - Math.pow(1 - k, 3);
-          el.textContent = String(Math.round(to * eased));
+          el.textContent = `${Math.round(to * eased)}${suffix}`;
           if (k < 1) raf = requestAnimationFrame(tick);
         };
-        el.textContent = "0";
+        el.textContent = `0${suffix}`;
         raf = requestAnimationFrame(tick);
       },
       { threshold: 0.6 },
@@ -36,11 +36,12 @@ export function CountUp({ to, className }: { to: number; className?: string }) {
       io.disconnect();
       cancelAnimationFrame(raf);
     };
-  }, [to]);
+  }, [to, suffix]);
 
   return (
     <span ref={ref} className={className}>
       {to}
+      {suffix}
     </span>
   );
 }

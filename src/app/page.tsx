@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { HomeAbout } from "@/components/sections/home/HomeAbout";
-import { HomeAccreditations } from "@/components/sections/home/HomeAccreditations";
 import { HomeClients } from "@/components/sections/home/HomeClients";
 import { HomeCta } from "@/components/sections/home/HomeCta";
 import { HomeFaq } from "@/components/sections/home/HomeFaq";
@@ -25,7 +24,7 @@ export const metadata: Metadata = {
 };
 
 /**
- * Home: hero, clients, about, accreditations, services, why choose us, iconic
+ * Home: hero, clients, about, services, why choose us, iconic
  * projects, latest news, FAQ, closing call to action (then the footer).
  */
 export default function HomePage() {
@@ -36,7 +35,6 @@ export default function HomePage() {
       <HomeHero />
       <HomeClients />
       <HomeAbout />
-      <HomeAccreditations />
       <HomeServices />
       <HomeWhyBim />
       <HomeProjects />

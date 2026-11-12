@@ -296,7 +296,7 @@ export default function KitPage() {
               name="kit-faq"
               items={[
                 { id: "a", question: "Is SBT part of TXG?", answer: "Yes. Smart Built Technologies is the Chennai-based company of the Technical Xperts Group, founded in Riyadh in 2014." },
-                { id: "b", question: "Do you deliver BIM to ISO 19650?", answer: "Yes. Group delivery is certified to ISO 19650-1 and ISO 19650-2." },
+                { id: "b", question: "Do you deliver BIM to ISO 19650?", answer: "Yes. Our BIM delivery follows ISO 19650." },
               ]}
             />
           </div>

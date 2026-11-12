@@ -76,18 +76,6 @@ export const site = {
       ],
       mapUrl: "https://maps.google.com/?q=SAIF+Zone,+Sharjah",
     },
-    {
-      id: "kozhikode",
-      city: "Kozhikode",
-      country: "India",
-      role: "Group office",
-      address: [
-        "Technical Xperts Group (TXG) - Saudi Arabia",
-        "Cyberpark, Kozhikode",
-        "Kerala, India",
-      ],
-      mapUrl: "https://maps.google.com/?q=Govt+Cyberpark,+Kozhikode",
-    },
   ] satisfies Office[],
 
   /** Key figures — group-level until SBT-specific numbers are confirmed (PLAN.md §1 #4) */
@@ -98,7 +86,6 @@ export const site = {
       label: "Professionals at TXG, KSA",
     },
     { value: "22", label: "Landmark projects" },
-    { value: "ISO 19650", label: "Certified delivery" },
   ],
 
   /** Hidden until SBT accounts exist (PLAN.md §1 #9) */

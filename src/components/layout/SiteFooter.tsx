@@ -68,7 +68,6 @@ export function SiteFooter() {
             © {COPYRIGHT_YEAR} {site.name}. The production firm of {site.groupLabel}.
           </p>
           <ul className="flex items-center gap-5">
-            <li>ISO 19650 certified delivery</li>
             {legalNav.map((l) => (
               <li key={l.href}>
                 <Link href={l.href} className="underline-offset-[4px] hover:text-white hover:underline">

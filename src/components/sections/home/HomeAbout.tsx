@@ -23,8 +23,8 @@ const lineage = [
   },
   {
     when: "Group",
-    where: "Sharjah · Kozhikode",
-    text: "Group offices keep project teams close to clients across the region.",
+    where: "Sharjah",
+    text: "A group office in the UAE supports projects for clients across the Gulf.",
   },
   {
     when: "Now",
@@ -34,7 +34,7 @@ const lineage = [
   },
 ];
 
-const figures: { n: number; label: string; note: string }[] = [
+const figures: { n: number; suffix?: string; label: string; note: string }[] = [
   {
     n: projects.length,
     label: "Landmark projects",
@@ -46,9 +46,10 @@ const figures: { n: number; label: string; note: string }[] = [
     note: "Saudi Arabia and Australia",
   },
   {
-    n: 4,
-    label: "ISO certificates",
-    note: "Quality, environment, safety, security",
+    n: 250,
+    suffix: "+",
+    label: "Professionals",
+    note: `At ${site.groupLabel}, and growing`,
   },
   { n: site.offices.length, label: "Offices", note: "From Riyadh to Chennai" },
 ];
@@ -179,7 +180,7 @@ export function HomeAbout() {
                 <Label>{f.label}</Label>
               </dt>
               <dd className="order-1 text-[clamp(3.25rem,2rem+4.6vw,6.25rem)] leading-[0.9] font-medium tracking-[-0.06em] tabular-nums">
-                <CountUp to={f.n} />
+                <CountUp to={f.n} suffix={f.suffix} />
               </dd>
               <dd className="order-3 text-[0.875rem] text-slate-700">
                 {f.note}

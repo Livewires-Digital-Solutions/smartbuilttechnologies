@@ -73,14 +73,6 @@ export const events: GroupEvent[] = [
     image: e("10th-anniversary-event-riyadh.jpg", 1200, 800),
   },
   {
-    slug: "10th-anniversary-kozhikode",
-    title: "Tenth anniversary — Kozhikode",
-    type: "Company milestone",
-    start: "2023-10-13",
-    location: "Kozhikode, India",
-    image: e("10th-anniversary-event-kozhikode.jpg", 1024, 587),
-  },
-  {
     slug: "ifsec-international-2023",
     title: "IFSEC International 2023",
     type: "Exhibition",
@@ -88,13 +80,5 @@ export const events: GroupEvent[] = [
     end: "2023-05-18",
     location: "London, UK",
     image: e("ifsec-international-2023.jpg", 768, 1024),
-  },
-  {
-    slug: "office-inauguration-cyberpark",
-    title: "Office opening, Cyberpark",
-    type: "Company milestone",
-    start: "2022-09-16",
-    location: "Kozhikode, India",
-    image: e("office-inauguration-cyberpark.jpg", 1800, 1200),
   },
 ];

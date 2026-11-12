@@ -36,7 +36,7 @@ export const homeFaqs: Faq[] = [
     id: "iso-19650",
     question: "Do you work to ISO 19650?",
     answer:
-      "Our BIM delivery follows ISO 19650, the international standard for managing information over the whole life of a built asset. Technical Xperts Group (TXG) - Saudi Arabia holds ISO 14001:2015 (environmental management) and ISO 45001:2018 (health and safety). Our published certificates also include ISO 9001:2015 (quality) and ISO 27001:2022 (information security).",
+      "Our BIM delivery follows ISO 19650, the international standard for managing information over the whole life of a built asset.",
   },
   {
     id: "vision-2030",
@@ -48,7 +48,7 @@ export const homeFaqs: Faq[] = [
     id: "where",
     question: "Where do you operate?",
     answer:
-      "Technical Xperts Group (TXG) - Saudi Arabia is headquartered in Riyadh, with offices in Sharjah (UAE) and Kozhikode (India). Our production centre is in Chennai. Projects have been delivered in Saudi Arabia and Australia, among other places.",
+      "Technical Xperts Group (TXG) - Saudi Arabia is headquartered in Riyadh, with a group office in Sharjah (UAE). Our production centre is in Chennai. Projects have been delivered in Saudi Arabia and Australia, among other places.",
   },
   {
     id: "projects",
