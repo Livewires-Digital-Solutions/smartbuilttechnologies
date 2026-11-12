@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import {
   useEffect,
@@ -8,12 +9,6 @@ import {
   useSyncExternalStore,
   type CSSProperties,
 } from "react";
-import {
-  GroupRoute,
-  STOPS,
-  type RouteActive,
-  type RouteStop,
-} from "@/components/about/GroupRoute";
 import { ButtonLink } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { Section } from "@/components/ui/Section";
@@ -25,25 +20,59 @@ import { cn } from "@/lib/cn";
 
 const HEADLINE = ["The production", "firm behind", "landmarks"];
 
-/** Share of the pinned scroll used by the opening and closing "whole route" views. */
-const LEAD = 0.06;
-const TAIL = 0.06;
+const riyadhMetro = projects.find((p) => p.slug === "riyadh-metro");
 
+/** The three chapters of the story, each with its own photograph. */
 const STAGES = [
   {
-    phrase: "Where it began",
+    label: "The record",
+    phrase: `Since ${site.foundedGroup}`,
+    colour: "var(--color-navy)",
+    chip: `Associated with ${site.groupLabel}`,
+    caption: "King Abdullah Financial District",
     text: `${site.groupLabel} is founded in Riyadh in ${site.foundedGroup} and builds its record on landmark projects in the Gulf and Australia.`,
     link: { label: "See the projects", href: "/projects" },
+    image: {
+      src: "/assets/misc/hero-architecture.webp",
+      width: 2400,
+      height: 1432,
+      alt: "The King Abdullah Financial District skyline in Riyadh at sunset",
+      position: "55% 40%",
+    },
   },
   {
-    phrase: "Group office",
-    text: "A group office in the UAE supports projects for clients across the Gulf.",
+    label: "The group",
+    phrase: "Riyadh · Sharjah",
+    colour: "var(--color-cobalt)",
+    chip: `Associated with ${site.groupLabel}`,
+    caption: riyadhMetro
+      ? `${riyadhMetro.name}, ${riyadhMetro.location}`
+      : "Riyadh",
+    text: "Group teams in Riyadh and Sharjah work with clients across the Gulf, on projects that shape the region’s skylines.",
     link: { label: "Where we work", href: "#where" },
+    image: {
+      src: riyadhMetro?.image.src ?? "/assets/misc/hero-architecture.webp",
+      width: riyadhMetro?.image.width ?? 2400,
+      height: riyadhMetro?.image.height ?? 1432,
+      alt: riyadhMetro ? `${riyadhMetro.name}, ${riyadhMetro.location}` : "",
+      position: "50% 50%",
+    },
   },
   {
-    phrase: "Production centre",
-    text: `${site.name} opens in Chennai as the production firm of ${site.groupLabel}: modelling, scanning, data and software.`,
+    label: "The production firm",
+    phrase: "Chennai · Now",
+    colour: "var(--color-orange)",
+    chip: "From drawing to model",
+    caption: "Modelling, scanning, data and software",
+    text: `${site.name} opens in Chennai as the production firm of ${site.groupLabel}, carrying the group’s experience into every model.`,
     link: { label: "Our services", href: "/services" },
+    image: {
+      src: "/assets/misc/team-at-work.jpg",
+      width: 1040,
+      height: 660,
+      alt: "A hand holding a building model over architectural drawings",
+      position: "62% 50%",
+    },
   },
 ] as const;
 
@@ -57,21 +86,15 @@ const reducedMotion = {
   server: () => false,
 };
 
-const phaseAt = (p: number): RouteActive => {
-  if (p < LEAD || p > 1 - TAIL) return "all";
-  const i = Math.floor(((p - LEAD) / (1 - LEAD - TAIL)) * 3);
-  return Math.min(2, Math.max(0, i)) as RouteStop;
-};
-
 /**
  * About hero, built like the home hero. Left: the headline, the buttons and the
- * three places of the group as a list. Right: a drawing of the route from Riyadh
- * to Sharjah to Chennai. On wide screens the hero pins and scrolling travels the
- * route, place by place, while the list follows; clicking a place scrolls to its
- * moment. On phones and with reduced motion the places are simply clickable.
+ * three chapters of the story as a list. Right: a photograph for the chapter in
+ * focus. On wide screens the hero pins and scrolling moves through the chapters
+ * while the list follows; clicking a chapter scrolls to its moment. On phones and
+ * with reduced motion the chapters are simply clickable.
  */
 export function AboutHero() {
-  const [active, setActive] = useState<RouteActive>("all");
+  const [active, setActive] = useState(0);
   const reduced = useSyncExternalStore(
     reducedMotion.subscribe,
     reducedMotion.get,
@@ -89,13 +112,13 @@ export function AboutHero() {
       const st = ScrollTrigger.create({
         trigger: el,
         start: "top top",
-        end: () => `+=${Math.round(window.innerHeight * 2.2)}`,
+        end: () => `+=${Math.round(window.innerHeight * 1.8)}`,
         pin: true,
         scrub: true,
         anticipatePin: 1,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
-          const next = phaseAt(self.progress);
+          const next = Math.min(2, Math.floor(self.progress * 3));
           setActive((cur) => (cur === next ? cur : next));
         },
         onRefresh: (self) => {
@@ -111,21 +134,19 @@ export function AboutHero() {
     return () => mm.revert();
   }, [reduced]);
 
-  const pick = (a: RouteStop) => {
+  const pick = (i: number) => {
     const t = trigger.current;
     if (!t) {
-      setActive((cur) => (cur === a ? "all" : a));
+      setActive(i);
       return;
     }
-    const p = a === active ? 0 : LEAD + ((a + 0.5) / 3) * (1 - LEAD - TAIL);
-    const y = t.start + p * (t.end - t.start);
+    const y = t.start + ((i + 0.5) / 3) * (t.end - t.start);
     const smoother = registerGsap().ScrollSmoother.get();
     if (smoother) smoother.scrollTo(y, true);
     else window.scrollTo({ top: y, behavior: "smooth" });
   };
 
-  const stage = active === "all" ? null : STAGES[active];
-  const step = active === "all" ? 0 : active + 1;
+  const stage = STAGES[active]!;
 
   return (
     <Section
@@ -187,18 +208,17 @@ export function AboutHero() {
 
               <div
                 role="group"
-                aria-label="The three places of the group"
+                aria-label="The story in three chapters"
                 className="mt-1 border-t-[1.5px] border-t-navy"
               >
-                {STOPS.map((s, i) => {
-                  const n = i as RouteStop;
-                  const on = active === n;
+                {STAGES.map((s, i) => {
+                  const on = active === i;
                   return (
                     <button
-                      key={s.key}
+                      key={s.label}
                       type="button"
                       aria-pressed={on}
-                      onClick={() => pick(n)}
+                      onClick={() => pick(i)}
                       className="group flex w-full items-center gap-4 border-b border-[var(--hairline)] py-[clamp(0.35rem,1.15svh,0.7rem)] text-left"
                     >
                       <span className="w-6 font-mono text-overline text-slate-500">
@@ -212,13 +232,13 @@ export function AboutHero() {
                       <span
                         className={cn(
                           "text-[clamp(1.375rem,1rem+1vw,2rem)] leading-none font-medium tracking-[-0.04em] transition-opacity",
-                          active !== "all" && !on && "opacity-45",
+                          !on && "opacity-45",
                         )}
                       >
-                        {s.city}
+                        {s.label}
                       </span>
                       <Label className="ml-auto text-slate-700">
-                        {STAGES[i]!.phrase}
+                        {s.phrase}
                       </Label>
                     </button>
                   );
@@ -227,36 +247,46 @@ export function AboutHero() {
             </div>
           </div>
 
-          {/* Right: the route */}
+          {/* Right: the photograph for the chapter in focus */}
           <figure className="relative col-span-12 flex min-h-0 flex-col lg:col-span-5">
-            <div className="relative h-[400px] flex-none sm:h-[480px] lg:h-auto lg:min-h-0 lg:flex-1">
-              <Label className="absolute top-3.5 right-0 z-10 hidden whitespace-nowrap text-right text-slate-700 lg:block">
+            <div className="hidden items-center justify-end border-t border-b border-t-navy border-b-[var(--hairline)] py-2.5 lg:flex">
+              <Label className="text-slate-700">
                 The production firm of TXG, KSA
               </Label>
-              <div
-                className="absolute inset-0"
-                style={{
-                  maskImage:
-                    "linear-gradient(to right, transparent, #000 6%, #000 94%, transparent), linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent)",
-                  WebkitMaskImage:
-                    "linear-gradient(to right, transparent, #000 6%, #000 94%, transparent), linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent)",
-                  maskComposite: "intersect",
-                  WebkitMaskComposite: "source-in",
-                }}
-              >
-                <GroupRoute active={active} className="absolute inset-0" />
-              </div>
+            </div>
+            <div className="relative mt-0 h-[380px] flex-none overflow-hidden bg-slate-200 sm:h-[480px] lg:mt-4 lg:h-auto lg:min-h-0 lg:flex-1">
+              {STAGES.map((s, i) => (
+                <Image
+                  key={s.label}
+                  src={s.image.src}
+                  alt={i === active ? s.image.alt : ""}
+                  aria-hidden={i === active ? undefined : true}
+                  width={s.image.width}
+                  height={s.image.height}
+                  sizes="(min-width: 1024px) 40vw, 100vw"
+                  priority={i === 0}
+                  className="grade absolute inset-0 h-full w-full object-cover transition-[opacity,scale] duration-[900ms] ease-[var(--ease-out)]"
+                  style={{
+                    objectPosition: s.image.position,
+                    opacity: i === active ? 1 : 0,
+                    scale: i === active ? 1 : 1.06,
+                  }}
+                />
+              ))}
+              <span className="absolute top-0 left-0 bg-navy px-3 py-2 font-mono text-overline text-white uppercase">
+                {stage.chip}
+              </span>
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute bottom-4 left-0 flex items-center gap-2"
+                className="pointer-events-none absolute bottom-4 left-4 flex items-center gap-2"
               >
-                {STOPS.map((s, i) => (
+                {STAGES.map((s, i) => (
                   <span
-                    key={s.key}
+                    key={s.label}
                     className="h-[3px] w-8 transition-colors duration-[var(--duration-ui)]"
                     style={{
                       background:
-                        step === i + 1 ? s.colour : "rgb(12 20 70 / 0.15)",
+                        i === active ? s.colour : "rgb(255 255 255 / 0.55)",
                     }}
                   />
                 ))}
@@ -265,45 +295,35 @@ export function AboutHero() {
             <figcaption className="flex flex-col gap-2 py-3">
               <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
                 <Label className="text-slate-700">
-                  Fig. 01 ·{" "}
-                  {stage
-                    ? `0${step} · ${STOPS[step - 1]!.city}: ${stage.phrase}`
-                    : "The whole route"}
+                  Fig. 01 · 0{active + 1} · {stage.label}: {stage.caption}
                 </Label>
                 <Label className="text-slate-700">
-                  <span className="lg:hidden">Tap a place</span>
+                  <span className="lg:hidden">Tap a chapter</span>
                   <span className="hidden lg:inline">
-                    Scroll to travel the route
+                    Scroll to read the story
                   </span>
                 </Label>
               </div>
               <div aria-live="polite" className="min-h-[2.9rem]">
-                {stage ? (
-                  <p
-                    key={step}
-                    className="he-card max-w-[74ch] text-[0.9375rem] leading-snug text-slate-700"
+                <p
+                  key={active}
+                  className="he-card max-w-[74ch] text-[0.9375rem] leading-snug text-slate-700"
+                >
+                  {stage.text}{" "}
+                  <Link
+                    href={stage.link.href}
+                    className="group/l inline-flex items-center gap-1.5 font-semibold whitespace-nowrap text-navy"
                   >
-                    {stage.text}{" "}
-                    <Link
-                      href={stage.link.href}
-                      className="group/l inline-flex items-center gap-1.5 font-semibold whitespace-nowrap text-navy"
-                    >
-                      <span className="underline underline-offset-[5px]">
-                        {stage.link.label}
-                      </span>
-                      <Icon
-                        name="arrow-right"
-                        size={14}
-                        className="transition-transform group-hover/l:translate-x-1"
-                      />
-                    </Link>
-                  </p>
-                ) : (
-                  <p className="max-w-[74ch] text-[0.9375rem] leading-snug text-slate-700">
-                    From the headquarters in Riyadh, through the group office
-                    in Sharjah, to the production centre in Chennai.
-                  </p>
-                )}
+                    <span className="underline underline-offset-[5px]">
+                      {stage.link.label}
+                    </span>
+                    <Icon
+                      name="arrow-right"
+                      size={14}
+                      className="transition-transform group-hover/l:translate-x-1"
+                    />
+                  </Link>
+                </p>
               </div>
             </figcaption>
           </figure>

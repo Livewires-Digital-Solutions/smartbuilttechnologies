@@ -5,6 +5,12 @@ import { Label } from "@/components/ui/Typography";
 import { site } from "@/content/site";
 import { cn } from "@/lib/cn";
 
+const blurb: Record<string, string> = {
+  chennai: "Production centre: modelling, scanning, data and software.",
+  riyadh: `Headquarters of ${site.groupLabel}, where the group began in ${site.foundedGroup}.`,
+  sharjah: "Group office, supporting clients across the Gulf.",
+};
+
 /**
  * Where we work: an index like the services list on the home page. One ruled row
  * per place, the city set large, the role and address beside it.
@@ -36,7 +42,7 @@ export function AboutOffices() {
                         rel: "noreferrer",
                         "aria-label": `${o.city}, view on map`,
                       })}
-                  className="group grid grid-cols-12 items-center gap-x-6 gap-y-3 py-7 transition-colors hover:bg-white lg:py-9"
+                  className="group grid grid-cols-12 items-center gap-x-6 gap-y-3 py-7 transition-colors hover:bg-white lg:py-10"
                 >
                   <span className="col-span-2 font-mono text-overline text-slate-500 lg:col-span-1">
                     {String(i + 1).padStart(2, "0")}
@@ -55,6 +61,9 @@ export function AboutOffices() {
                   </span>
                   <span className="col-span-12 flex flex-col gap-1.5 lg:col-span-6">
                     <Label className="text-slate-700">{o.role}</Label>
+                    <span className="max-w-[48ch] text-lead text-navy">
+                      {blurb[o.id]}
+                    </span>
                     <span className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
                       <span className="flex flex-col text-slate-700">
                         {lines.map((l) => (

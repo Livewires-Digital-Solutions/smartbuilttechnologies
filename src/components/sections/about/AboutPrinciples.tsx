@@ -64,7 +64,7 @@ export function AboutPrinciples() {
             {values.map((v, i) => (
               <li
                 key={v.title}
-                className="why-stage relative pb-14 pl-12 last:pb-0 lg:min-h-[44svh]"
+                className="why-stage relative pb-12 pl-12 last:pb-0"
               >
                 <span
                   aria-hidden="true"

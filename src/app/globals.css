@@ -705,27 +705,3 @@ body:has(#main > [data-header="dark"]:first-child) .site-header[data-scrolled="f
     animation: he-card-in 520ms var(--ease-out) both;
   }
 }
-
-
-/* About hero: a place on the route that is in focus pings once and settles */
-@keyframes route-ping {
-  from {
-    opacity: 0.9;
-    transform: scale(0.6);
-  }
-  to {
-    opacity: 0;
-    transform: scale(1.6);
-  }
-}
-.route-ping {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: route-ping 1400ms var(--ease-out) infinite;
-}
-@media (prefers-reduced-motion: reduce) {
-  .route-ping {
-    animation: none;
-    opacity: 0.6;
-  }
-}
