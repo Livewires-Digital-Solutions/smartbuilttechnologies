@@ -140,11 +140,13 @@ export default async function ApplicationsPage({
         </p>
       ) : (
         <div className="overflow-x-auto border border-navy/15 bg-white">
-          <table className="w-full min-w-[760px] border-collapse text-left text-[0.9375rem]">
+          <table className="w-full min-w-[1040px] border-collapse text-left text-[0.9375rem]">
             <thead>
               <tr className="border-b border-navy/15 font-mono text-overline font-medium text-slate-700 uppercase">
                 <th className="px-4 py-3">Applicant</th>
                 <th className="px-4 py-3">Position</th>
+                <th className="px-4 py-3">Experience</th>
+                <th className="px-4 py-3">Message</th>
                 <th className="px-4 py-3">Status</th>
                 <th className="px-4 py-3">Applied</th>
                 <th className="px-4 py-3">CV</th>
@@ -174,6 +176,26 @@ export default async function ApplicationsPage({
                         General
                       </div>
                     ) : null}
+                  </td>
+                  <td className="px-4 py-3 whitespace-nowrap">
+                    {a.experienceYears ? (
+                      `${a.experienceYears} yr${a.experienceYears === "1" ? "" : "s"}`
+                    ) : (
+                      <span className="text-slate-500">–</span>
+                    )}
+                  </td>
+                  <td className="max-w-[18rem] px-4 py-3">
+                    {a.message ? (
+                      <Link
+                        href={`/sys-ops/applications/${a.id}`}
+                        title={a.message}
+                        className="line-clamp-2 text-slate-700 hover:text-navy"
+                      >
+                        {a.message}
+                      </Link>
+                    ) : (
+                      <span className="text-slate-500">–</span>
+                    )}
                   </td>
                   <td className="px-4 py-3">
                     <StatusBadge status={a.status} />
