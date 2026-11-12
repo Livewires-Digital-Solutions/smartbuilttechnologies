@@ -96,8 +96,8 @@ export function ProjectsFilmstrip({
             </h2>
             <p className="max-w-[40ch] text-lead text-slate-700">
               Some of the most ambitious buildings in the Gulf and Australia,
-              associated with Technical Xperts Group (TXG) - Saudi Arabia, whose
-              experience and track record are Smart Built Technologies’ own.
+              associated with TXG KSA, whose experience and track record are
+              Smart Built Technologies’ own.
             </p>
             <Link
               href="/projects"

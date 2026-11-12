@@ -3,6 +3,19 @@
 import { useEffect, useRef, type RefObject } from "react";
 import type { ActiveLayer } from "./geometry";
 
+type Loaded = [typeof import("three"), typeof import("./createBuildingScene")];
+let loading: Promise<Loaded> | null = null;
+/** Start fetching three.js and the scene code; safe to call more than once. */
+const load = () =>
+  (loading ??= Promise.all([import("three"), import("./createBuildingScene")]));
+// Begin the download as soon as this module runs (during hydration), not after the first effect.
+if (
+  typeof window !== "undefined" &&
+  !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+) {
+  load().catch(() => {});
+}
+
 /**
  * Mounts the 3D building into a div. three.js is loaded only here, on demand,
  * so the rest of the page does not pay for it. If WebGL is unavailable it does

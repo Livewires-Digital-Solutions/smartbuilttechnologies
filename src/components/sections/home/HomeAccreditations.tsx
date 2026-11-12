@@ -61,7 +61,7 @@ export function HomeAccreditations() {
                   </span>
                   {a.heldByKsa ? (
                     <span className="mt-1 w-fit border border-navy px-2 py-0.5">
-                      <Label>Held by {site.group}</Label>
+                      <Label>Held by {site.groupLabel}</Label>
                     </span>
                   ) : null}
                 </figcaption>

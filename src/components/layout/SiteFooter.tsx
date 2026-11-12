@@ -65,7 +65,7 @@ export function SiteFooter() {
 
         <div className="flex flex-col gap-3 border-t border-[var(--hairline)] py-6 text-caption text-white/56 md:flex-row md:items-center md:justify-between">
           <p>
-            © {COPYRIGHT_YEAR} {site.name}. The production firm of {site.group}.
+            © {COPYRIGHT_YEAR} {site.name}. The production firm of {site.groupLabel}.
           </p>
           <ul className="flex items-center gap-5">
             <li>ISO 19650 certified delivery</li>

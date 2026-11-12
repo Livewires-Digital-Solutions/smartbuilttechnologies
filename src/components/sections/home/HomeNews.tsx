@@ -25,7 +25,7 @@ export function HomeNews() {
           <article className="reveal col-span-12 flex flex-col gap-6 lg:col-span-5 lg:col-start-4">
             <div className="flex items-center gap-3">
               <span className="border border-navy px-2 py-0.5">
-                <Label>Technical Xperts Group (TXG) - Saudi Arabia news</Label>
+                <Label>TXG KSA news</Label>
               </span>
               <Label className="tabular text-slate-700">
                 {formatDate(latestNews.date)}

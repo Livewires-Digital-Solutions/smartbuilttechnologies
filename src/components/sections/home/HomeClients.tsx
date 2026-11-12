@@ -34,7 +34,7 @@ export function HomeClients() {
               The clients behind the track record
             </h2>
             <p className="max-w-[40ch] text-lead text-slate-700">
-              {site.name} carries the experience of {site.group}, which has
+              {site.name} carries the experience of {site.groupLabel}, which has
               worked with the developers, contractors and owners behind the
               Gulf’s most ambitious buildings.
             </p>

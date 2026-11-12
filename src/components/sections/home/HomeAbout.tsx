@@ -19,7 +19,7 @@ const lineage = [
   {
     when: String(site.foundedGroup),
     where: "Riyadh",
-    text: `${site.group} is founded and builds its record on landmark projects in the Gulf and Australia.`,
+    text: `${site.groupLabel} is founded and builds its record on landmark projects in the Gulf and Australia.`,
   },
   {
     when: "Group",
@@ -29,7 +29,7 @@ const lineage = [
   {
     when: "Now",
     where: "Chennai",
-    text: `${site.name} opens as the production firm of ${site.group}: modelling, scanning, data and software.`,
+    text: `${site.name} opens as the production firm of ${site.groupLabel}: modelling, scanning, data and software.`,
     current: true,
   },
 ];
@@ -38,7 +38,7 @@ const figures: { n: number; label: string; note: string }[] = [
   {
     n: projects.length,
     label: "Landmark projects",
-    note: `Associated with ${site.group}`,
+    note: `Associated with ${site.groupLabel}`,
   },
   {
     n: countries,
@@ -96,7 +96,7 @@ export function HomeAbout() {
                 className="grade h-full w-full object-cover"
               />
               <span className="absolute top-0 left-0 bg-navy px-3 py-2 font-mono text-overline text-white uppercase">
-                Associated with {site.group}
+                Associated with {site.groupLabel}
               </span>
             </div>
             <figcaption className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
@@ -108,7 +108,7 @@ export function HomeAbout() {
           <div className="col-span-12 flex flex-col gap-9 lg:col-span-5 lg:col-start-8">
             <p className="reveal max-w-[50ch] text-lead text-slate-700">
               We were set up to meet growing demand and we work under the{" "}
-              {site.group} name. Teams in Riyadh and Sharjah stay close to
+              {site.groupLabel} name. Teams in Riyadh and Sharjah stay close to
               clients in the Gulf, while the modelling, scanning, data and
               software production happens in Chennai.
             </p>
@@ -192,8 +192,8 @@ export function HomeAbout() {
           id="about-fn"
           className="mt-8 max-w-[70ch] font-mono text-[0.75rem] leading-relaxed text-slate-700"
         >
-          1 · Projects associated with {site.group}, whose experience and track
-          record {site.name} carries.{" "}
+          1 · Projects associated with {site.groupLabel}, whose experience and
+          track record {site.name} carries.{" "}
           <Link href="/projects" className="underline underline-offset-2">
             Full list on Projects
           </Link>

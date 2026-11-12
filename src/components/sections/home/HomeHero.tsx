@@ -151,8 +151,7 @@ export function HomeHero() {
             <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 border-t border-b border-t-navy border-b-[var(--hairline)] py-2.5">
               <Label>Smart Built Technologies · Chennai</Label>
               <Label className="text-slate-700 lg:hidden">
-                The production firm of Technical Xperts Group (TXG) - Saudi
-                Arabia
+                The production firm of TXG KSA
               </Label>
             </div>
             <div className="flex flex-1 flex-col justify-center gap-[clamp(0.75rem,2svh,1.25rem)] py-5 lg:min-h-0">
@@ -240,8 +239,7 @@ export function HomeHero() {
           <figure className="relative col-span-12 flex min-h-0 flex-col lg:col-span-5">
             <div className="relative h-[460px] flex-none sm:h-[560px] lg:h-auto lg:min-h-0 lg:flex-1">
               <Label className="absolute top-3.5 right-0 z-10 hidden max-w-[32ch] text-right leading-snug text-slate-700 lg:block">
-                The production firm of Technical Xperts Group (TXG) - Saudi
-                Arabia
+                The production firm of TXG KSA
               </Label>
               <div className="absolute inset-0 [mask-image:radial-gradient(ellipse_68%_62%_at_50%_50%,#000_48%,transparent_100%)]">
                 {still ? (
