@@ -36,7 +36,7 @@ const frames: FilmFrame[] = SLUGS.flatMap((slug) => {
  * whose track record Smart Built Technologies carries. Most photographs are 572 px
  * wide, so frames stay small until the originals arrive (PLAN.md).
  */
-export function HomeProjects() {
+export function HomeProjects({ index = "06" }: { index?: string }) {
   return (
     <Section
       surface="paper"
@@ -44,7 +44,7 @@ export function HomeProjects() {
       aria-labelledby="projects-title"
       className="py-16 lg:py-0"
     >
-      <ProjectsFilmstrip frames={frames} total={projects.length} />
+      <ProjectsFilmstrip frames={frames} total={projects.length} index={index} />
     </Section>
   );
 }

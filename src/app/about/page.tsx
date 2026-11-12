@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
-import { AboutExperience } from "@/components/sections/about/AboutExperience";
 import { AboutFaq } from "@/components/sections/about/AboutFaq";
-import { AboutGroup } from "@/components/sections/about/AboutGroup";
 import { AboutHero } from "@/components/sections/about/AboutHero";
 import { AboutOffices } from "@/components/sections/about/AboutOffices";
 import { AboutPrinciples } from "@/components/sections/about/AboutPrinciples";
 import { AboutStory } from "@/components/sections/about/AboutStory";
-import { AboutWork } from "@/components/sections/about/AboutWork";
 import { HomeCta } from "@/components/sections/home/HomeCta";
+import { HomeProjects } from "@/components/sections/home/HomeProjects";
 import { breadcrumbJsonLd, JsonLd } from "@/lib/jsonld";
 
 const title = "About Us | Smart Built Technologies, Production Firm of TXG, KSA";
@@ -23,8 +21,9 @@ export const metadata: Metadata = {
 };
 
 /**
- * About: hero, our story, the group, vision and values, offices, the four
- * pathways, experience, FAQ, closing call to action (then the footer).
+ * About, built from the home page's own moves: a pinned hero that travels the
+ * route from Riyadh to Chennai, a story rail, the navy values band, an index of
+ * offices, the pinned projects filmstrip, FAQ and the closing call to action.
  */
 export default function AboutPage() {
   return (
@@ -38,11 +37,9 @@ export default function AboutPage() {
       <div className="scroll-progress" aria-hidden="true" />
       <AboutHero />
       <AboutStory />
-      <AboutGroup />
       <AboutPrinciples />
       <AboutOffices />
-      <AboutWork />
-      <AboutExperience />
+      <HomeProjects index="04" />
       <AboutFaq />
       <HomeCta />
     </>

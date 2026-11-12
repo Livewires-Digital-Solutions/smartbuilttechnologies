@@ -26,9 +26,12 @@ const pad = (n: number) => String(n).padStart(2, "0");
 export function ProjectsFilmstrip({
   frames,
   total,
+  index = "06",
 }: {
   frames: FilmFrame[];
   total: number;
+  /** Section number in the running head */
+  index?: string;
 }) {
   const section = useRef<HTMLDivElement>(null);
   const wrap = useRef<HTMLDivElement>(null);
@@ -90,7 +93,7 @@ export function ProjectsFilmstrip({
         <div className="grid-12 items-center gap-y-10">
           {/* Left: the running head, pinned with the section */}
           <div className="col-span-12 flex flex-col gap-6 lg:col-span-4">
-            <Label className="text-slate-700">/ 06 · Iconic projects</Label>
+            <Label className="text-slate-700">/ {index} · Iconic projects</Label>
             <h2 id="projects-title" className="text-h1">
               Landmarks, modelled
             </h2>

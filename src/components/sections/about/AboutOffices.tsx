@@ -5,61 +5,77 @@ import { Label } from "@/components/ui/Typography";
 import { site } from "@/content/site";
 import { cn } from "@/lib/cn";
 
-/** Where we work: the production centre first, then the group offices. */
+/**
+ * Where we work: an index like the services list on the home page. One ruled row
+ * per place, the city set large, the role and address beside it.
+ */
 export function AboutOffices() {
   return (
-    <Section surface="paper" aria-labelledby="offices-title">
+    <Section surface="paper" aria-labelledby="offices-title" id="where">
       <div className="container-x">
-        <SectionHead id="offices-title" index="04" label="Where we work">
+        <SectionHead id="offices-title" index="03" label="Where we work">
           Production in Chennai, close to clients in the Gulf
         </SectionHead>
 
-        <ul className="reveal mt-12 grid border-t-[1.5px] border-t-navy lg:mt-16 lg:grid-cols-3">
+        <ul className="mt-12 border-t-[1.5px] border-t-navy lg:mt-16">
           {site.offices.map((o, i) => {
             const primary = "primary" in o && o.primary;
+            const lines =
+              o.id === "chennai"
+                ? [`${o.city}, Tamil Nadu`, o.country]
+                : o.address.slice(1);
+            const Row = o.id === "chennai" ? "div" : "a";
             return (
-              <li
-                key={o.id}
-                className={cn(
-                  "flex flex-col gap-4 border-b border-[var(--hairline)] py-8 lg:border-b-0 lg:py-10 lg:pr-10",
-                  i > 0 && "lg:border-l lg:pl-10",
-                )}
-              >
-                <span className="flex items-center gap-3">
-                  <span
-                    aria-hidden="true"
-                    className={cn(
-                      "size-[11px] rounded-[3px]",
-                      primary ? "bg-orange" : "bg-navy",
-                    )}
-                  />
-                  <Label className="text-slate-700">{o.role}</Label>
-                </span>
-                <h3 className="text-h1">{o.city}</h3>
-                <address className="flex flex-col text-slate-700 not-italic">
-                  {o.id === "chennai"
-                    ? [`${o.city}, Tamil Nadu`, o.country].map((l) => (
-                        <span key={l}>{l}</span>
-                      ))
-                    : o.address.slice(1).map((l) => <span key={l}>{l}</span>)}
-                </address>
-                {o.id !== "chennai" ? (
-                  <a
-                    href={o.mapUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="group inline-flex items-center gap-2 self-start font-semibold text-navy"
-                  >
-                    <span className="underline underline-offset-[6px]">
-                      View on map
-                    </span>
-                    <Icon
-                      name="arrow-up-right"
-                      size={16}
-                      className="transition-transform duration-[var(--duration-ui)] ease-[var(--ease-out)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              <li key={o.id} className="reveal border-b border-[var(--hairline)]">
+                <Row
+                  {...(o.id === "chennai"
+                    ? {}
+                    : {
+                        href: o.mapUrl,
+                        target: "_blank",
+                        rel: "noreferrer",
+                        "aria-label": `${o.city}, view on map`,
+                      })}
+                  className="group grid grid-cols-12 items-center gap-x-6 gap-y-3 py-7 transition-colors hover:bg-white lg:py-9"
+                >
+                  <span className="col-span-2 font-mono text-overline text-slate-500 lg:col-span-1">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="col-span-10 flex items-center gap-4 lg:col-span-5">
+                    <span
+                      aria-hidden="true"
+                      className={cn(
+                        "size-3 shrink-0 rounded-[3px] transition-transform duration-[var(--duration-ui)] ease-[var(--ease-out)] group-hover:scale-[1.4]",
+                        primary ? "bg-orange" : "bg-navy",
+                      )}
                     />
-                  </a>
-                ) : null}
+                    <span className="text-[clamp(2.5rem,1.4rem+3.6vw,5.5rem)] leading-[0.95] font-medium tracking-[-0.055em] transition-transform duration-[var(--duration-ui)] ease-[var(--ease-out)] group-hover:translate-x-1">
+                      {o.city}
+                    </span>
+                  </span>
+                  <span className="col-span-12 flex flex-col gap-1.5 lg:col-span-6">
+                    <Label className="text-slate-700">{o.role}</Label>
+                    <span className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
+                      <span className="flex flex-col text-slate-700">
+                        {lines.map((l) => (
+                          <span key={l}>{l}</span>
+                        ))}
+                      </span>
+                      {o.id !== "chennai" ? (
+                        <span className="inline-flex items-center gap-2 font-semibold text-navy">
+                          <span className="underline underline-offset-[6px]">
+                            View on map
+                          </span>
+                          <Icon
+                            name="arrow-up-right"
+                            size={16}
+                            className="transition-transform duration-[var(--duration-ui)] ease-[var(--ease-out)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                          />
+                        </span>
+                      ) : null}
+                    </span>
+                  </span>
+                </Row>
               </li>
             );
           })}

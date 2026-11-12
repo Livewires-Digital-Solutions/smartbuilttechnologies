@@ -14,7 +14,7 @@ export function AboutFaq() {
         <div className="grid-12 gap-y-10">
           <div className="col-span-12 lg:col-span-4">
             <StickyPin topRem={3} className="flex flex-col gap-6">
-              <Overline index="07" className="text-slate-700">
+              <Overline index="05" className="text-slate-700">
                 Questions
               </Overline>
               <h2 id="about-faq-title" className="text-h1">
