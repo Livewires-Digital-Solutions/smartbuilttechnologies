@@ -538,38 +538,18 @@
     height: 44px;
   }
 }
-/* "Part of TXG, KSA": a highlighted tag under the logo */
+/* "Part of TXG, KSA": bold text under the logo, no background */
 .header-txg {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 4px;
-  padding: 3px 8px 3px 6px;
-  border-radius: 2px;
-  background-color: var(--color-navy);
-  color: var(--color-white);
+  display: block;
+  margin-top: 5px;
+  color: inherit;
   font-family: var(--font-mono, ui-monospace, monospace);
-  font-size: 0.625rem;
+  font-size: 0.6875rem;
   line-height: 1;
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   white-space: nowrap;
-  transition:
-    background-color var(--duration-ui) var(--ease-out),
-    color var(--duration-ui) var(--ease-out);
-}
-.header-txg::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  border-radius: 1px;
-  background-color: var(--color-orange);
-}
-body:has(#main > [data-header="dark"]:first-child) .site-header[data-scrolled="false"][data-open="false"] .header-txg,
-.site-header[data-mobile="true"] .header-txg {
-  background-color: var(--color-white);
-  color: var(--color-navy);
 }
 
 .nav-link {
