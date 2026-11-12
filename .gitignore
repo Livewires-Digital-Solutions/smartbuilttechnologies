@@ -40,3 +40,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 /shots
+
+# local data (CV uploads) and env
+/storage
+!.env.example

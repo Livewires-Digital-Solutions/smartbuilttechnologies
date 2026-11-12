@@ -1,12 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Mono, Plus_Jakarta_Sans } from "next/font/google";
-import { NavLogo } from "@/components/brand/NavLogo";
-import { SiteFooter } from "@/components/layout/SiteFooter";
-import { SmoothScroll } from "@/components/layout/SmoothScroll";
-import { SiteHeader } from "@/components/layout/SiteHeader";
-import { SkipLink } from "@/components/ui/Breadcrumbs";
 import { site } from "@/content/site";
-import { organizationJsonLd, JsonLd } from "@/lib/jsonld";
 import "./globals.css";
 
 /** Plus Jakarta Sans — what we say: headlines, copy, UI (Typography System v1.0). Variable 200–800, self-hosted. */
@@ -60,23 +54,18 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+/**
+ * The shell shared by everything: fonts, global styles and the document. The public
+ * site's header, footer and smooth scrolling live in `(site)/layout.tsx`; the admin
+ * area in `(admin)` has its own plain layout.
+ */
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en-IN"
       className={`${jakarta.variable} ${jakartaItalic.variable} ${plexMono.variable}`}
     >
-      <body>
-        <SkipLink />
-        <SiteHeader logo={<NavLogo title={null} />} />
-        <SmoothScroll>
-          <main id="main" tabIndex={-1} className="outline-none">
-            {children}
-          </main>
-          <SiteFooter />
-        </SmoothScroll>
-        <JsonLd data={organizationJsonLd()} />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

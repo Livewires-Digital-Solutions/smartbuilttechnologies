@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useEffect, type ReactNode } from "react";
+import { Suspense, useEffect, type ReactNode } from "react";
 import { ScrollEffects } from "@/components/layout/ScrollEffects";
 import { registerGsap } from "@/lib/gsap";
 
@@ -15,8 +15,6 @@ import { registerGsap } from "@/lib/gsap";
  * not work inside it. Sticky blocks use <StickyPin> (a GSAP pin) instead.
  */
 export function SmoothScroll({ children }: { children: ReactNode }) {
-  const pathname = usePathname();
-
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const { ScrollSmoother, ScrollTrigger } = registerGsap();
@@ -37,7 +35,22 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  // A new route starts at the top.
+  return (
+    <div id="smooth-wrapper">
+      <div id="smooth-content">{children}</div>
+      {/* these two read the route, so they sit in Suspense: a page whose address is only
+          known at request time (a job page) then does not hold up the whole shell */}
+      <Suspense fallback={null}>
+        <ScrollToTopOnRoute />
+        <ScrollEffects />
+      </Suspense>
+    </div>
+  );
+}
+
+/** A new route starts at the top. */
+function ScrollToTopOnRoute() {
+  const pathname = usePathname();
   useEffect(() => {
     const { ScrollSmoother, ScrollTrigger } = registerGsap();
     const s = ScrollSmoother.get();
@@ -45,11 +58,5 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     else window.scrollTo(0, 0);
     ScrollTrigger.refresh();
   }, [pathname]);
-
-  return (
-    <div id="smooth-wrapper">
-      <div id="smooth-content">{children}</div>
-      <ScrollEffects />
-    </div>
-  );
+  return null;
 }
