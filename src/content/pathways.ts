@@ -59,3 +59,11 @@ export const pathwayById = (id: PathwayId) => {
   if (!p) throw new Error(`Unknown pathway: ${id}`);
   return p;
 };
+
+/** The pathway colours from the logo (Colour System p.8). */
+export const PATHWAY_COLOUR: Record<PathwayId, string> = {
+  foundation: "#0C1446",
+  precision: "#7CC0FA",
+  "digital-layer": "#1D6BF3",
+  integration: "#FF5200",
+};
