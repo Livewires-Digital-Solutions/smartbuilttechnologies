@@ -538,25 +538,36 @@
     height: 44px;
   }
 }
-/* "Part of TXG, KSA": bold text under the logo, spread to the logo's width, no background */
+/* "Part of Technical Xperts Group (TXG) - Saudi Arabia": bold text to the right of the logo, behind a thin vertical line */
 .header-txg {
-  display: block;
-  align-self: stretch;
-  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  max-width: 134px;
+  min-height: 32px;
+  margin-left: 12px;
+  padding-left: 12px;
+  border-left: 1px solid color-mix(in srgb, currentColor 35%, transparent);
   color: inherit;
-  font-size: 0.6875rem;
-  line-height: 1;
+  font-size: 0.5625rem;
+  line-height: 1.25;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  text-align: justify;
-  text-align-last: justify;
-  white-space: nowrap;
+  text-wrap: balance;
 }
-@media (max-width: 1279px) {
+@media (min-width: 1024px) {
   .header-txg {
+    max-width: 128px;
+    min-height: 36px;
+  }
+}
+@media (min-width: 1280px) {
+  .header-txg {
+    max-width: 210px;
+    min-height: 38px;
+    margin-left: 16px;
+    padding-left: 16px;
     font-size: 0.625rem;
-    letter-spacing: 0.04em;
   }
 }
 

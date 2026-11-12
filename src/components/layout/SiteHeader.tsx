@@ -130,10 +130,10 @@ export function SiteHeader({ logo, contactHref = "/contact" }: { logo: ReactNode
       onPointerLeave={closeOnLeave}
     >
       <div className="container-x flex h-[var(--header-h)] items-center justify-between gap-6">
-        <Link href="/" className="header-logo -my-2 flex flex-col items-start py-2" aria-label={`Smart Built Technologies, part of ${site.groupLabel}, home`}>
+        <Link href="/" className="header-logo -my-2 flex items-center py-2" aria-label={`Smart Built Technologies, part of ${site.group}, home`}>
           {logo}
           <span className="header-txg" aria-hidden="true">
-            Part of {site.groupLabel}
+            Part of {site.group.replace(" - ", "\u00A0- ")}
           </span>
         </Link>
 
