@@ -20,7 +20,7 @@ export const site = {
   group: "Technical Xperts Group (TXG) - Saudi Arabia",
   groupShort: "TXG",
   /** Short form for labels, tags and chips where the full name does not fit */
-  groupLabel: "TXG KSA",
+  groupLabel: "TXG, KSA",
   groupUrl: "https://txgksa.com",
   /** PLACEHOLDER — final domain */
   url: "https://www.smartbuilttech.com",
@@ -55,7 +55,7 @@ export const site = {
       id: "riyadh",
       city: "Riyadh",
       country: "Saudi Arabia",
-      role: "TXG KSA headquarters",
+      role: "TXG, KSA headquarters",
       address: [
         "Technical Xperts Group (TXG) - Saudi Arabia",
         "Al Kindi Plaza, Diplomatic Quarter",
@@ -95,7 +95,7 @@ export const site = {
     { value: "2014", label: "Group founded" },
     {
       value: "250+",
-      label: "Professionals at TXG KSA",
+      label: "Professionals at TXG, KSA",
     },
     { value: "22", label: "Landmark projects" },
     { value: "ISO 19650", label: "Certified delivery" },

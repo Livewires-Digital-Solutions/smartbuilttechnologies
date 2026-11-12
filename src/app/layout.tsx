@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Mono, Plus_Jakarta_Sans } from "next/font/google";
-import { Logo } from "@/components/brand/Logo";
+import { NavLogo } from "@/components/brand/NavLogo";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { SiteHeader } from "@/components/layout/SiteHeader";
@@ -62,10 +62,13 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-IN" className={`${jakarta.variable} ${jakartaItalic.variable} ${plexMono.variable}`}>
+    <html
+      lang="en-IN"
+      className={`${jakarta.variable} ${jakartaItalic.variable} ${plexMono.variable}`}
+    >
       <body>
         <SkipLink />
-        <SiteHeader logo={<Logo lockup="horizontal" title={null} />} />
+        <SiteHeader logo={<NavLogo title={null} />} />
         <SmoothScroll>
           <main id="main" tabIndex={-1} className="outline-none">
             {children}

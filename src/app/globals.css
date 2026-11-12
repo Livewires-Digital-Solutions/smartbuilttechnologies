@@ -430,6 +430,9 @@
 [data-logo="inverse"] .lg-descriptor {
   fill: #ffffff;
 }
+[data-logo="inverse"] .lg-foundation-shade {
+  display: none;
+}
 [data-logo="inverse"] .lg-divider {
   stroke: rgb(255 255 255 / 0.35);
 }
@@ -522,11 +525,12 @@
   translate: 0 -100%;
 }
 .header-logo .sbt-logo {
-  width: 136px;
+  width: auto;
+  height: 40px;
 }
 @media (min-width: 1280px) {
   .header-logo .sbt-logo {
-    width: 156px;
+    height: 48px;
   }
 }
 
@@ -589,6 +593,10 @@ body:has(#main > [data-header="dark"]:first-child) .site-header[data-scrolled="f
 }
 body:has(#main > [data-header="dark"]:first-child) .site-header[data-scrolled="false"][data-open="false"] :is(.lg-foundation, .lg-wordmark, .lg-descriptor) {
   fill: #ffffff;
+}
+body:has(#main > [data-header="dark"]:first-child) .site-header[data-scrolled="false"][data-open="false"] .lg-foundation-shade,
+.site-header[data-mobile="true"] .lg-foundation-shade {
+  display: none;
 }
 body:has(#main > [data-header="dark"]:first-child) .site-header[data-scrolled="false"][data-open="false"] .lg-divider {
   stroke: rgb(255 255 255 / 0.35);

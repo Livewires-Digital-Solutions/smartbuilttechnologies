@@ -151,7 +151,7 @@ export function HomeHero() {
             <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 border-t border-b border-t-navy border-b-[var(--hairline)] py-2.5">
               <Label>Smart Built Technologies · Chennai</Label>
               <Label className="text-slate-700 lg:hidden">
-                The production firm of TXG KSA
+                The production firm of TXG, KSA
               </Label>
             </div>
             <div className="flex flex-1 flex-col justify-center gap-[clamp(0.75rem,2svh,1.25rem)] py-5 lg:min-h-0">
@@ -238,10 +238,21 @@ export function HomeHero() {
           {/* Right: the building */}
           <figure className="relative col-span-12 flex min-h-0 flex-col lg:col-span-5">
             <div className="relative h-[460px] flex-none sm:h-[560px] lg:h-auto lg:min-h-0 lg:flex-1">
-              <Label className="absolute top-3.5 right-0 z-10 hidden max-w-[32ch] text-right leading-snug text-slate-700 lg:block">
-                The production firm of TXG KSA
+              <Label className="absolute top-3.5 right-0 z-10 hidden whitespace-nowrap text-right text-slate-700 lg:block">
+                The production firm of TXG, KSA
               </Label>
-              <div className="absolute inset-0 [mask-image:radial-gradient(ellipse_68%_62%_at_50%_50%,#000_48%,transparent_100%)]">
+              <div
+                className="absolute inset-0"
+                style={{
+                  /* fade all four edges to the page background, so the 3D has no box around it */
+                  maskImage:
+                    "linear-gradient(to right, transparent, #000 15%, #000 85%, transparent), linear-gradient(to bottom, transparent, #000 15%, #000 85%, transparent)",
+                  WebkitMaskImage:
+                    "linear-gradient(to right, transparent, #000 15%, #000 85%, transparent), linear-gradient(to bottom, transparent, #000 15%, #000 85%, transparent)",
+                  maskComposite: "intersect",
+                  WebkitMaskComposite: "source-in",
+                }}
+              >
                 {still ? (
                   <BuildingPoster
                     active={active}
@@ -274,7 +285,7 @@ export function HomeHero() {
                 ))}
               </div>
             </div>
-            <figcaption className="flex flex-col gap-2 border-t border-navy/15 py-3">
+            <figcaption className="flex flex-col gap-2 py-3">
               <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
                 <Label className="text-slate-700">
                   Fig. 01 ·{" "}
