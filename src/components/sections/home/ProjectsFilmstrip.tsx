@@ -84,7 +84,7 @@ export function ProjectsFilmstrip({
   return (
     <div
       ref={section}
-      className="relative lg:flex lg:h-svh lg:min-h-[640px] lg:items-center lg:overflow-hidden lg:pt-[var(--header-h)]"
+      className="relative lg:flex lg:h-svh lg:min-h-[640px] lg:items-center lg:overflow-hidden lg:pt-[var(--header-h)] lg:pb-[8svh]"
     >
       <div className="container-x w-full">
         <div className="grid-12 items-center gap-y-10">
@@ -96,8 +96,8 @@ export function ProjectsFilmstrip({
             </h2>
             <p className="max-w-[40ch] text-lead text-slate-700">
               Some of the most ambitious buildings in the Gulf and Australia,
-              associated with TXG KSA, whose experience and track record are
-              Smart Built Technologies’ own.
+              associated with Technical Xperts Group (TXG) - Saudi Arabia, whose
+              experience and track record are Smart Built Technologies’ own.
             </p>
             <Link
               href="/projects"
@@ -189,7 +189,7 @@ export function ProjectsFilmstrip({
                   href="/projects"
                   className="group flex aspect-[4/5] flex-col justify-between bg-navy p-6 text-white transition-colors hover:bg-cobalt"
                 >
-                  <Label className="text-white/70">More from TXG KSA</Label>
+                  <Label className="text-white/70">More from TXG</Label>
                   <span className="flex flex-col gap-4">
                     <span className="text-[clamp(2.5rem,1.6rem+2.4vw,4rem)] leading-[0.95] font-medium tracking-[-0.05em]">
                       All {total} projects

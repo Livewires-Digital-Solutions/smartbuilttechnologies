@@ -29,7 +29,7 @@ const lineage = [
   {
     when: "Now",
     where: "Chennai",
-    text: `${site.name} opens as the production hub of ${site.group}: modelling, scanning, data and software.`,
+    text: `${site.name} opens as the production firm of ${site.group}: modelling, scanning, data and software.`,
     current: true,
   },
 ];
@@ -54,7 +54,7 @@ const figures: { n: number; label: string; note: string }[] = [
 ];
 
 /**
- * About: who we are. SBT is the production hub of TXG KSA and carries its track
+ * About: who we are. SBT is the production firm of Technical Xperts Group (TXG) - Saudi Arabia and carries its track
  * record (client brief, 11 Nov 2026). A short statement, then a real project beside
  * the family tree (Riyadh → group offices → Chennai), then four counted figures.
  */
@@ -72,7 +72,7 @@ export function HomeAbout() {
 
         <div className="grid-12 mt-10 lg:mt-14">
           <p className="reveal text-statement col-span-12 max-w-[32ch] lg:col-span-8 lg:col-start-4 lg:max-w-[36ch]">
-            {site.name} is the production hub of {site.group}. Our new
+            {site.name} is the production firm of {site.group}. Our new
             production centre in Chennai carries the experience of{" "}
             {projects.length}
             <sup className="-top-[1.15em] ml-[0.08em] font-mono text-[0.4em] font-medium tracking-normal text-slate-700">

@@ -35,7 +35,8 @@ export const services: ServiceSummary[] = [
     order: 1,
     title: "BIM in design",
     shortTitle: "BIM in design",
-    summary: "Coordinated, multi-discipline models from concept to LOD 500, delivered to ISO 19650.",
+    summary:
+      "Coordinated, multi-discipline models from concept to LOD 500, delivered to ISO 19650.",
     icon: "bim-model",
   },
   {
@@ -44,7 +45,8 @@ export const services: ServiceSummary[] = [
     order: 2,
     title: "4D construction and logistics simulation",
     shortTitle: "4D simulation",
-    summary: "The model linked to the programme, so sequence, logistics and clashes in time are seen before site.",
+    summary:
+      "The model linked to the programme, so sequence, logistics and clashes in time are seen before site.",
     icon: "schedule",
   },
   {
@@ -53,7 +55,8 @@ export const services: ServiceSummary[] = [
     order: 3,
     title: "Reality capture and scan to BIM",
     shortTitle: "Reality capture",
-    summary: "LiDAR scanning and point-cloud processing, modelled to the detail the project actually needs.",
+    summary:
+      "LiDAR scanning and point-cloud processing, modelled to the detail the project actually needs.",
     icon: "scan",
   },
   {
@@ -62,7 +65,8 @@ export const services: ServiceSummary[] = [
     order: 4,
     title: "Digital twin and smart buildings",
     shortTitle: "Digital twin",
-    summary: "A live model of the building, connected to BMS and IoT data for monitoring and maintenance.",
+    summary:
+      "A live model of the building, connected to BMS and IoT data for monitoring and maintenance.",
     icon: "digital-twin",
   },
   {
@@ -71,7 +75,8 @@ export const services: ServiceSummary[] = [
     order: 5,
     title: "GIS integration and smart cities",
     shortTitle: "GIS and smart cities",
-    summary: "Building data placed in geographic context, from one site to a whole district.",
+    summary:
+      "Building data placed in geographic context, from one site to a whole district.",
     icon: "site",
   },
   {
@@ -80,7 +85,8 @@ export const services: ServiceSummary[] = [
     order: 6,
     title: "Immersive solutions (AR / VR / XR)",
     shortTitle: "AR / VR / XR",
-    summary: "Walk through the model at full scale, or overlay it on site, before decisions are fixed.",
+    summary:
+      "Walk through the model at full scale, or overlay it on site, before decisions are fixed.",
     icon: "layers",
   },
   {
@@ -89,7 +95,8 @@ export const services: ServiceSummary[] = [
     order: 7,
     title: "Asset management systems",
     shortTitle: "Asset management",
-    summary: "CAFM and CMMS platforms fed with clean BIM and asset data, ready on the day of handover.",
+    summary:
+      "CAFM and CMMS platforms fed with clean BIM and asset data, ready on the day of handover.",
     icon: "data",
   },
   {
@@ -98,7 +105,8 @@ export const services: ServiceSummary[] = [
     order: 8,
     title: "CAFM implementation",
     shortTitle: "CAFM",
-    summary: "Facility management software configured around how your team actually runs the building.",
+    summary:
+      "Facility management software configured around how your team actually runs the building.",
     icon: "building",
   },
   {
@@ -107,7 +115,8 @@ export const services: ServiceSummary[] = [
     order: 9,
     title: "IT services and infrastructure",
     shortTitle: "IT services",
-    summary: "Web, mobile and integration software for engineering, construction and facilities teams.",
+    summary:
+      "Web, mobile and integration software for engineering, construction and facilities teams.",
     icon: "cloud",
   },
 ];
@@ -119,12 +128,15 @@ export const serviceBySlug = (slug: ServiceSlug) => {
 };
 
 export const servicesByPathway = (pathway: PathwayId) =>
-  services.filter((s) => s.pathway === pathway).sort((a, b) => a.order - b.order);
+  services
+    .filter((s) => s.pathway === pathway)
+    .sort((a, b) => a.order - b.order);
 
 /** Asset tagging lives as a section of asset-management but is listed under Precision. */
 export const assetTaggingLink = {
   title: "Asset tagging",
   href: "/services/asset-management#asset-tagging",
-  summary: "QR, barcode and RFID tagging that links every physical asset to its digital record.",
+  summary:
+    "QR, barcode and RFID tagging that links every physical asset to its digital record.",
   icon: "report" as BrandIconName,
 };

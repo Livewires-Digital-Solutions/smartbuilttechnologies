@@ -32,7 +32,7 @@ const frames: FilmFrame[] = SLUGS.flatMap((slug) => {
 
 /**
  * Iconic projects: a filmstrip. The section pins on wide screens and scrolling slides
- * the strip sideways, one landmark at a time. Every project is associated with TXG KSA,
+ * the strip sideways, one landmark at a time. Every project is associated with Technical Xperts Group (TXG) - Saudi Arabia,
  * whose track record Smart Built Technologies carries. Most photographs are 572 px
  * wide, so frames stay small until the originals arrive (PLAN.md).
  */

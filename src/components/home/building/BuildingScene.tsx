@@ -11,11 +11,14 @@ import type { ActiveLayer } from "./geometry";
 export function BuildingScene({
   active,
   onReady,
+  onFail,
   progress,
   className,
 }: {
   active: ActiveLayer;
-  onReady: () => void;
+  onReady?: () => void;
+  /** Called if the 3D scene cannot start, so the page can fall back to the drawing */
+  onFail?: () => void;
   /** Scroll progress of the pinned hero, 0 to 1 */
   progress?: RefObject<number>;
   className?: string;
@@ -23,11 +26,13 @@ export function BuildingScene({
   const host = useRef<HTMLDivElement>(null);
   const activeRef = useRef<ActiveLayer>(active);
   const readyRef = useRef(onReady);
+  const failRef = useRef(onFail);
   const progressRef = useRef(progress);
 
   useEffect(() => {
     activeRef.current = active;
     readyRef.current = onReady;
+    failRef.current = onFail;
     progressRef.current = progress;
   });
 
@@ -40,15 +45,22 @@ export function BuildingScene({
     const gl = probe.getContext("webgl2") ?? probe.getContext("webgl");
     if (!gl) return;
     (async () => {
-      const [THREE, { createBuildingScene }] = await Promise.all([import("three"), import("./createBuildingScene")]);
-      if (disposed) return;
-      dispose = createBuildingScene(
-        THREE,
-        el,
-        () => activeRef.current,
-        () => readyRef.current(),
-        () => progressRef.current?.current ?? 0,
-      );
+      try {
+        const [THREE, { createBuildingScene }] = await Promise.all([
+          import("three"),
+          import("./createBuildingScene"),
+        ]);
+        if (disposed) return;
+        dispose = createBuildingScene(
+          THREE,
+          el,
+          () => activeRef.current,
+          () => readyRef.current?.(),
+          () => progressRef.current?.current ?? 0,
+        );
+      } catch {
+        if (!disposed) failRef.current?.();
+      }
     })();
     return () => {
       disposed = true;

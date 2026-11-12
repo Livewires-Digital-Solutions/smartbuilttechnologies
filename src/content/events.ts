@@ -1,6 +1,7 @@
 /** Exhibitions, summits and milestones (source: txgksa.com/insights). */
 
-export type EventType = "Exhibition" | "Conference" | "Technology showcase" | "Company milestone";
+export type EventType =
+  "Exhibition" | "Conference" | "Technology showcase" | "Company milestone";
 
 export interface GroupEvent {
   slug: string;
@@ -13,7 +14,11 @@ export interface GroupEvent {
   image: { src: string; width: number; height: number };
 }
 
-const e = (file: string, width: number, height: number) => ({ src: `/assets/events/${file}`, width, height });
+const e = (file: string, width: number, height: number) => ({
+  src: `/assets/events/${file}`,
+  width,
+  height,
+});
 
 export const events: GroupEvent[] = [
   {

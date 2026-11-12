@@ -17,13 +17,13 @@ export const site = {
   name: "Smart Built Technologies",
   shortName: "SBT",
   tagline: "Built with Intelligence.",
-  group: "TXG KSA",
+  group: "Technical Xperts Group (TXG) - Saudi Arabia",
   groupShort: "TXG",
   groupUrl: "https://txgksa.com",
   /** PLACEHOLDER — final domain */
   url: "https://www.smartbuilttech.com",
   description:
-    "Smart Built Technologies is the production hub of TXG KSA, operating from a newly opened production centre in Chennai. BIM, reality capture, digital twins and facility systems for landmark buildings.",
+    "Smart Built Technologies is the production firm of Technical Xperts Group (TXG) - Saudi Arabia, operating from a newly opened production centre in Chennai. BIM, reality capture, digital twins and facility systems for landmark buildings.",
   locale: "en_IN",
   foundedGroup: 2014,
 
@@ -53,16 +53,25 @@ export const site = {
       id: "riyadh",
       city: "Riyadh",
       country: "Saudi Arabia",
-      role: "TXG KSA headquarters",
-      address: ["TXG KSA", "Al Kindi Plaza, Diplomatic Quarter", "Riyadh, KSA"],
-      mapUrl: "https://maps.google.com/?q=Al+Kindi+Plaza,+Diplomatic+Quarter,+Riyadh",
+      role: "Technical Xperts Group (TXG) - Saudi Arabia headquarters",
+      address: [
+        "Technical Xperts Group (TXG) - Saudi Arabia",
+        "Al Kindi Plaza, Diplomatic Quarter",
+        "Riyadh, KSA",
+      ],
+      mapUrl:
+        "https://maps.google.com/?q=Al+Kindi+Plaza,+Diplomatic+Quarter,+Riyadh",
     },
     {
       id: "sharjah",
       city: "Sharjah",
       country: "UAE",
       role: "Group office",
-      address: ["TXG KSA", "SAIF Zone, PO Box 513153", "Sharjah, UAE"],
+      address: [
+        "Technical Xperts Group (TXG) - Saudi Arabia",
+        "SAIF Zone, PO Box 513153",
+        "Sharjah, UAE",
+      ],
       mapUrl: "https://maps.google.com/?q=SAIF+Zone,+Sharjah",
     },
     {
@@ -70,7 +79,11 @@ export const site = {
       city: "Kozhikode",
       country: "India",
       role: "Group office",
-      address: ["TXG KSA", "Cyberpark, Kozhikode", "Kerala, India"],
+      address: [
+        "Technical Xperts Group (TXG) - Saudi Arabia",
+        "Cyberpark, Kozhikode",
+        "Kerala, India",
+      ],
       mapUrl: "https://maps.google.com/?q=Govt+Cyberpark,+Kozhikode",
     },
   ] satisfies Office[],
@@ -78,7 +91,10 @@ export const site = {
   /** Key figures — group-level until SBT-specific numbers are confirmed (PLAN.md §1 #4) */
   figures: [
     { value: "2014", label: "Group founded" },
-    { value: "250+", label: "Professionals at TXG KSA" },
+    {
+      value: "250+",
+      label: "Professionals at Technical Xperts Group (TXG) - Saudi Arabia",
+    },
     { value: "22", label: "Landmark projects" },
     { value: "ISO 19650", label: "Certified delivery" },
   ],

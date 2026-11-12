@@ -10,7 +10,7 @@ import { site } from "@/content/site";
 /**
  * Accreditations. The certificates themselves are the visual: real documents, set
  * on a paper tray with a register line under each. Only the four published ISO
- * certificates are shown (PLAN.md §1 #5). The two issued in Riyadh are TXG KSA's own
+ * certificates are shown (PLAN.md §1 #5). The two issued in Riyadh are Technical Xperts Group (TXG) - Saudi Arabia's own
  * and are tagged; the two issued in Kerala name a different company, so no claim is
  * made about them beyond showing them as issued.
  */

@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { PathwayGlyph } from "@/components/brand/Symbol";
 import { Icon } from "@/components/ui/Icon";
 import { Label } from "@/components/ui/Typography";
 import { StickyPin } from "@/components/ui/StickyPin";
@@ -17,13 +16,14 @@ export interface ServiceRow {
   summary: string;
   href: string;
   pathway: PathwayId;
-  /** A real project that used this service. Absent → the pathway glyph is shown instead. */
-  preview?: {
+  /** A photograph of this service at work, shown in the frame beside the list. */
+  preview: {
     src: string;
     width: number;
     height: number;
     alt: string;
     caption: string;
+    position?: string;
   };
 }
 
@@ -111,31 +111,25 @@ export function ServicesIndex({ groups }: { groups: ServiceGroup[] }) {
                   r.slug === current?.slug ? "opacity-100" : "opacity-0",
                 )}
               >
-                {r.preview ? (
-                  <Image
-                    src={r.preview.src}
-                    alt=""
-                    width={r.preview.width}
-                    height={r.preview.height}
-                    sizes="(min-width: 1440px) 420px, 30vw"
-                    className="grade h-full w-full object-cover"
-                  />
-                ) : (
-                  <div className="flex h-full w-full items-center justify-center p-[18%]">
-                    <PathwayGlyph
-                      pathway={r.pathway}
-                      className="h-auto w-full"
-                    />
-                  </div>
-                )}
+                <Image
+                  src={r.preview.src}
+                  alt=""
+                  width={r.preview.width}
+                  height={r.preview.height}
+                  sizes="(min-width: 1440px) 420px, 30vw"
+                  className="grade h-full w-full object-cover"
+                  style={
+                    r.preview.position
+                      ? { objectPosition: r.preview.position }
+                      : undefined
+                  }
+                />
               </div>
             ))}
           </div>
           <div className="flex items-baseline justify-between gap-4">
             <Label className="text-slate-700">
-              {current?.preview
-                ? `Fig. · ${current.preview.caption}`
-                : "Symbol · pathway"}
+              Fig. · {current?.preview.caption}
             </Label>
             <Label className="text-slate-700">{current?.num}</Label>
           </div>

@@ -3,7 +3,8 @@
  * The site's information architecture is organised by them.
  */
 
-export type PathwayId = "foundation" | "precision" | "digital-layer" | "integration";
+export type PathwayId =
+  "foundation" | "precision" | "digital-layer" | "integration";
 
 export interface Pathway {
   id: PathwayId;
@@ -20,7 +21,8 @@ export const pathways: Pathway[] = [
     id: "foundation",
     name: "Foundation",
     meaning: "Build / structure",
-    description: "Models and simulations for the physical environments we help deliver.",
+    description:
+      "Models and simulations for the physical environments we help deliver.",
     logoPart: "foundation",
     order: 1,
   },
@@ -28,7 +30,8 @@ export const pathways: Pathway[] = [
     id: "precision",
     name: "Precision",
     meaning: "Scan / capture",
-    description: "Accurate capture of what was actually built, and every asset inside it.",
+    description:
+      "Accurate capture of what was actually built, and every asset inside it.",
     logoPart: "precision",
     order: 2,
   },
@@ -36,7 +39,8 @@ export const pathways: Pathway[] = [
     id: "digital-layer",
     name: "Digital layer",
     meaning: "Data / twin",
-    description: "The digital model layered over the built world, from one room to a city.",
+    description:
+      "The digital model layered over the built world, from one room to a city.",
     logoPart: "digital",
     order: 3,
   },

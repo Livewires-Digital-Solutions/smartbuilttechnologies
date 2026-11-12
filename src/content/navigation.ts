@@ -30,7 +30,11 @@ export const servicesMenu = pathways.map((p) => {
     summary: s.summary,
   }));
   if (p.id === "precision") {
-    items.push({ title: assetTaggingLink.title, href: assetTaggingLink.href, summary: assetTaggingLink.summary });
+    items.push({
+      title: assetTaggingLink.title,
+      href: assetTaggingLink.href,
+      summary: assetTaggingLink.summary,
+    });
   }
   return { pathway: p, items };
 });
@@ -60,7 +64,10 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
     title: "Journal",
     links: [
       { label: "Blog", href: "/blog" },
-      { label: "Scan to BIM, explained", href: "/blog/scan-to-bim-process-accuracy-deliverables" },
+      {
+        label: "Scan to BIM, explained",
+        href: "/blog/scan-to-bim-process-accuracy-deliverables",
+      },
       { label: "What is a digital twin?", href: "/blog/what-is-digital-twin" },
     ],
   },

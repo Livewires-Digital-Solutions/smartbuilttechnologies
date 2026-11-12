@@ -34,6 +34,20 @@ const reducedMotion = {
   server: () => false,
 };
 
+/** Whether this browser can run WebGL. Checked once; assumed true on the server so no poster is drawn. */
+let webglSupport: boolean | null = null;
+const webgl = {
+  subscribe: () => () => {},
+  get: () => {
+    if (webglSupport === null) {
+      const c = document.createElement("canvas");
+      webglSupport = !!(c.getContext("webgl2") ?? c.getContext("webgl"));
+    }
+    return webglSupport;
+  },
+  server: () => true,
+};
+
 const phaseAt = (p: number): ActiveLayer => {
   if (p < LEAD || p > 1 - TAIL) return "all";
   const i = Math.floor(((p - LEAD) / (1 - LEAD - TAIL)) * 4);
@@ -50,12 +64,19 @@ const phaseAt = (p: number): ActiveLayer => {
  */
 export function HomeHero() {
   const [active, setActive] = useState<ActiveLayer>("all");
-  const [ready, setReady] = useState(false);
+  const [failed, setFailed] = useState(false);
   const reduced = useSyncExternalStore(
     reducedMotion.subscribe,
     reducedMotion.get,
     reducedMotion.server,
   );
+  const hasWebgl = useSyncExternalStore(
+    webgl.subscribe,
+    webgl.get,
+    webgl.server,
+  );
+  /** The drawn building is only for visitors who cannot, or should not, get the 3D one. */
+  const still = reduced || !hasWebgl || failed;
   const section = useRef<HTMLElement>(null);
   const progress = useRef(0);
   const trigger = useRef<{ start: number; end: number } | null>(null);
@@ -130,7 +151,8 @@ export function HomeHero() {
             <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 border-t border-b border-t-navy border-b-[var(--hairline)] py-2.5">
               <Label>Smart Built Technologies · Chennai</Label>
               <Label className="text-slate-700 lg:hidden">
-                The production hub of TXG KSA
+                The production firm of Technical Xperts Group (TXG) - Saudi
+                Arabia
               </Label>
             </div>
             <div className="flex flex-1 flex-col justify-center gap-[clamp(0.75rem,2svh,1.25rem)] py-5 lg:min-h-0">
@@ -217,22 +239,21 @@ export function HomeHero() {
           {/* Right: the building */}
           <figure className="relative col-span-12 flex min-h-0 flex-col lg:col-span-5">
             <div className="relative h-[460px] flex-none sm:h-[560px] lg:h-auto lg:min-h-0 lg:flex-1">
-              <Label className="absolute top-3.5 right-0 z-10 hidden text-slate-700 lg:block">
-                The production hub of TXG KSA
+              <Label className="absolute top-3.5 right-0 z-10 hidden max-w-[32ch] text-right leading-snug text-slate-700 lg:block">
+                The production firm of Technical Xperts Group (TXG) - Saudi
+                Arabia
               </Label>
               <div className="absolute inset-0 [mask-image:radial-gradient(ellipse_68%_62%_at_50%_50%,#000_48%,transparent_100%)]">
-                <BuildingPoster
-                  active={active}
-                  className={cn(
-                    "absolute inset-0 h-full w-full transition-opacity duration-[600ms] lg:pl-[10%]",
-                    ready && !reduced ? "opacity-0" : "opacity-100",
-                  )}
-                />
-                {reduced ? null : (
+                {still ? (
+                  <BuildingPoster
+                    active={active}
+                    className="absolute inset-0 h-full w-full lg:pl-[10%]"
+                  />
+                ) : (
                   <BuildingScene
                     active={active}
                     progress={progress}
-                    onReady={() => setReady(true)}
+                    onFail={() => setFailed(true)}
                     className="absolute inset-0"
                   />
                 )}
@@ -264,7 +285,7 @@ export function HomeHero() {
                     : "All four layers"}
                 </Label>
                 <Label className="text-slate-700">
-                  {reduced ? (
+                  {still ? (
                     "Illustrative building"
                   ) : (
                     <>
@@ -299,7 +320,7 @@ export function HomeHero() {
                   </p>
                 ) : (
                   <p className="text-[0.9375rem] leading-snug text-slate-700">
-                    {reduced ? (
+                    {still ? (
                       "Choose a layer to isolate it."
                     ) : (
                       <>

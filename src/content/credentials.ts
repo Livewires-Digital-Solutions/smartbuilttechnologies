@@ -5,7 +5,10 @@ export interface Logo {
   src: string;
 }
 
-const client = (file: string, name: string): Logo => ({ name, src: `/assets/clients/${file}.png` });
+const client = (file: string, name: string): Logo => ({
+  name,
+  src: `/assets/clients/${file}.png`,
+});
 const partner = (n: number, name: string): Logo => ({
   name,
   src: `/assets/partners/partner-${String(n).padStart(2, "0")}.png`,
@@ -58,7 +61,7 @@ export interface Accreditation {
   scope: string;
   /** The legal entity named on the certificate */
   holder: string;
-  /** True when the certificate is in TXG KSA's own name (Riyadh = KSA = Saudi) */
+  /** True when the certificate is in Technical Xperts Group (TXG) - Saudi Arabia's own name (Riyadh = KSA = Saudi) */
   heldByKsa: boolean;
   category: AccreditationCategory;
   image?: { src: string; width: number; height: number };
@@ -80,7 +83,11 @@ export const accreditations: Accreditation[] = [
     holder: "International TXG Pvt. Ltd., Kerala",
     heldByKsa: false,
     category: "iso",
-    image: { src: "/assets/certificates/iso-27001.png", width: 960, height: 1396 },
+    image: {
+      src: "/assets/certificates/iso-27001.png",
+      width: 960,
+      height: 1396,
+    },
   },
   {
     id: "iso-9001",
@@ -90,7 +97,11 @@ export const accreditations: Accreditation[] = [
     holder: "International TXG Pvt. Ltd., Kerala",
     heldByKsa: false,
     category: "iso",
-    image: { src: "/assets/certificates/iso-9001.png", width: 473, height: 688 },
+    image: {
+      src: "/assets/certificates/iso-9001.png",
+      width: 473,
+      height: 688,
+    },
   },
   {
     id: "iso-45001",
@@ -100,7 +111,11 @@ export const accreditations: Accreditation[] = [
     holder: "Technical Xperts International Ltd., Riyadh",
     heldByKsa: true,
     category: "iso",
-    image: { src: "/assets/certificates/iso-45001.png", width: 495, height: 691 },
+    image: {
+      src: "/assets/certificates/iso-45001.png",
+      width: 495,
+      height: 691,
+    },
   },
   {
     id: "iso-14001",
@@ -110,11 +125,19 @@ export const accreditations: Accreditation[] = [
     holder: "Technical Xperts International Ltd., Riyadh",
     heldByKsa: true,
     category: "iso",
-    image: { src: "/assets/certificates/iso-14001.png", width: 495, height: 691 },
+    image: {
+      src: "/assets/certificates/iso-14001.png",
+      width: 495,
+      height: 691,
+    },
   },
 ];
 
-export const accreditationCategories: { id: AccreditationCategory | "all"; label: string; total: number }[] = [
+export const accreditationCategories: {
+  id: AccreditationCategory | "all";
+  label: string;
+  total: number;
+}[] = [
   { id: "all", label: "All", total: 15 },
   { id: "iso", label: "ISO standards", total: 5 },
   { id: "government", label: "Government and trade", total: 5 },
