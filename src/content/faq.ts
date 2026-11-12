@@ -57,3 +57,18 @@ export const homeFaqs: Faq[] = [
       "Our experience comes from 22 landmark projects associated with Technical Xperts Group (TXG) - Saudi Arabia, including NEOM Bay Airport, King Abdullah Financial District, Sports Boulevard, Riyadh Metro, Jeddah Tower, Tadawul Tower and the Jeddah Opera House.",
   },
 ];
+
+/** About-page FAQ: the questions a client asks when checking who is behind SBT. */
+const pick = (ids: string[]) =>
+  ids.map((id) => homeFaqs.find((f) => f.id === id)).filter((f): f is Faq => Boolean(f));
+
+export const aboutFaqs: Faq[] = [
+  ...pick(["part-of-txg"]),
+  {
+    id: "why-chennai",
+    question: "Why was the Chennai production centre opened?",
+    answer:
+      "To meet growing demand. The Chennai production centre expands the Technical Xperts Group (TXG) - Saudi Arabia portfolio with more capacity for BIM, reality capture, digital twins and software, and it works under the TXG name.",
+  },
+  ...pick(["where", "projects"]),
+];
