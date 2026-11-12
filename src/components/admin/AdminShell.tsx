@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { logoutAction } from "@/app/(admin)/sys-ops/actions";
 import { hasSession } from "@/lib/auth";
-import { btnOutline } from "./ui";
+import { btnOutline } from "./styles";
 
 const nav = [
   { href: "/sys-ops", label: "Overview" },

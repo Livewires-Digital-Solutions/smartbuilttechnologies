@@ -7,6 +7,7 @@ import {
 } from "node:crypto";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { connection } from "next/server";
 
 /**
  * One shared admin login. The username and password come from the environment
@@ -91,6 +92,8 @@ export async function hasSession(): Promise<boolean> {
   const [expires, sig] = raw.split(".");
   if (!expires || !sig) return false;
   if (!same(sig, sign(expires))) return false;
+  // Partial Prefetching can render with cookies but must not read the clock: wait for the request.
+  await connection();
   return Number(expires) > Math.floor(Date.now() / 1000);
 }
 

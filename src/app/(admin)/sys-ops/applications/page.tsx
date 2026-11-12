@@ -1,10 +1,6 @@
 import Link from "next/link";
-import {
-  StatusBadge,
-  btnOutline,
-  btnPrimary,
-  inputCls,
-} from "@/components/admin/ui";
+import { StatusBadge } from "@/components/admin/ui";
+import { btnOutline, btnPrimary, inputCls } from "@/components/admin/styles";
 import { APPLICATION_STATUSES } from "@/content/careers";
 import { filterFrom } from "@/lib/application-filter";
 import { PAGE_SIZE, listApplications } from "@/lib/applications";
@@ -69,7 +65,9 @@ export default async function ApplicationsPage({
         </p>
       ) : null}
 
+      {/* the key resets the fields when the filters in the address change */}
       <form
+        key={`${filter.status}|${filter.jobId}|${filter.q}`}
         method="get"
         className="flex flex-wrap items-end gap-3 border border-navy/15 bg-white p-4"
       >
@@ -149,6 +147,7 @@ export default async function ApplicationsPage({
                 <th className="px-4 py-3">Position</th>
                 <th className="px-4 py-3">Status</th>
                 <th className="px-4 py-3">Applied</th>
+                <th className="px-4 py-3">CV</th>
               </tr>
             </thead>
             <tbody>
@@ -181,6 +180,15 @@ export default async function ApplicationsPage({
                   </td>
                   <td className="px-4 py-3 text-slate-700">
                     {fmtDateTime(a.createdAt)}
+                  </td>
+                  <td className="px-4 py-3">
+                    <a
+                      href={`/sys-ops/cv/${a.id}`}
+                      className="font-semibold underline underline-offset-[5px]"
+                      aria-label={`Download ${a.name}'s CV`}
+                    >
+                      Download
+                    </a>
                   </td>
                 </tr>
               ))}

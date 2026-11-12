@@ -2,7 +2,8 @@
 
 import { useActionState } from "react";
 import { loginAction, type LoginState } from "@/app/(admin)/sys-ops/actions";
-import { SubmitButton, inputCls } from "./ui";
+import { SubmitButton } from "./ui";
+import { inputCls } from "./styles";
 
 /** The one shared admin login. */
 export function LoginForm() {

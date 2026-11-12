@@ -4,12 +4,8 @@ import {
   duplicateJobAction,
   jobStatusAction,
 } from "@/app/(admin)/sys-ops/actions";
-import {
-  ConfirmSubmit,
-  JobStatusBadge,
-  btnOutline,
-  btnSignal,
-} from "@/components/admin/ui";
+import { ConfirmSubmit, JobStatusBadge } from "@/components/admin/ui";
+import { btnOutline, btnSignal } from "@/components/admin/styles";
 import { employmentLabel, workModeLabel } from "@/content/careers";
 import { requireAdmin } from "@/lib/auth";
 import { fmtDate } from "@/lib/format";

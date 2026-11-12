@@ -59,10 +59,16 @@ export const viewport: Viewport = {
  * site's header, footer and smooth scrolling live in `(site)/layout.tsx`; the admin
  * area in `(admin)` has its own plain layout.
  */
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html
       lang="en-IN"
+      // globals.css sets smooth scrolling; this lets a route change still jump straight to the top
+      data-scroll-behavior="smooth"
       className={`${jakarta.variable} ${jakartaItalic.variable} ${plexMono.variable}`}
     >
       <body>{children}</body>

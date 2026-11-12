@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { SectionHead } from "@/components/ui/SectionHead";
 import { Label } from "@/components/ui/Typography";
 import type { Project, Sector } from "@/content/projects";
-import { registerGsap } from "@/lib/gsap";
+import { scrollToElement } from "@/lib/gsap";
 import { cn } from "@/lib/cn";
 
 /** The NEOM Bay Airport photograph has a logo baked into its lower edge; cropping from the top keeps it out of the frame. */
@@ -44,12 +44,11 @@ export function ProjectsGallery({
       window.setTimeout(() => {
         const el = document.getElementById(id);
         if (!el) return;
-        const smoother = registerGsap().ScrollSmoother.get();
-        if (smoother) smoother.scrollTo(el, true, "top 110px");
-        else el.scrollIntoView({ behavior: "smooth", block: "start" });
+        scrollToElement(el, 112, true);
       }, 450);
     };
-    toHash();
+    // On arrival the page's own route handler scrolls to the card (the list starts
+    // unfiltered). This covers a link clicked while already on the page.
     window.addEventListener("hashchange", toHash);
     return () => window.removeEventListener("hashchange", toHash);
   }, [projects]);

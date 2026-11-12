@@ -8,18 +8,9 @@ import {
   type JobStatus,
 } from "@/content/careers";
 import { cn } from "@/lib/cn";
+import { btnDanger, btnPrimary } from "./styles";
 
 /** Small pieces shared by the admin screens. Plain and quick to read, in the site's colours. */
-
-export const inputCls =
-  "w-full rounded-[var(--radius-button)] border border-navy/25 bg-white px-3 py-2.5 text-[0.9375rem] text-navy placeholder:text-slate-500 hover:border-navy/50 focus:border-navy focus:outline-none aria-[invalid=true]:border-orange";
-
-export const btn =
-  "inline-flex h-10 items-center justify-center gap-2 rounded-[var(--radius-button)] px-4 text-[0.875rem] font-semibold whitespace-nowrap transition-colors disabled:pointer-events-none disabled:opacity-50";
-export const btnPrimary = `${btn} bg-navy text-white hover:bg-navy-80`;
-export const btnSignal = `${btn} bg-orange text-navy hover:bg-orange-80`;
-export const btnOutline = `${btn} border border-navy/25 text-navy hover:border-navy hover:bg-white`;
-export const btnDanger = `${btn} border border-navy/25 text-navy hover:border-orange hover:text-orange`;
 
 export function StatusBadge({ status }: { status: ApplicationStatus }) {
   const s = APPLICATION_STATUSES.find((x) => x.value === status);

@@ -8,7 +8,8 @@ import {
 } from "@/app/(admin)/sys-ops/actions";
 import { EMPLOYMENT_TYPES, WORK_MODES } from "@/content/careers";
 import type { Job } from "@/lib/jobs";
-import { SubmitButton, btnOutline, inputCls } from "./ui";
+import { SubmitButton } from "./ui";
+import { btnOutline, inputCls } from "./styles";
 
 const slugify = (s: string) =>
   s

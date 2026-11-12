@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
 import { GENERAL_POSITIONS } from "@/content/careers";
 import { createApplication, recentDuplicate } from "@/lib/applications";
 import { dbConfigured } from "@/lib/db";
@@ -19,10 +19,30 @@ import {
  * team and the applicant without making the applicant wait for the mail server.
  */
 
+/** One address only: no spaces, brackets, commas or quotes that could smuggle in a second recipient. */
+const EMAIL = /^[^\s@<>(),;:"\\]+@[^\s@<>(),;:"\\]+\.[^\s@<>(),;:"\\]{2,}$/;
+
 const json = (body: Record<string, unknown>, status = 200) =>
   NextResponse.json(body, { status, headers: { "Cache-Control": "no-store" } });
 
 export async function POST(request: Request) {
+  try {
+    return await handle(request);
+  } catch (e) {
+    // for example the database is down: say so plainly instead of a broken page
+    console.error("[apply] unexpected failure:", e);
+    return json(
+      {
+        ok: false,
+        error:
+          "We could not take your application right now. Please try again in a few minutes.",
+      },
+      500,
+    );
+  }
+}
+
+async function handle(request: Request) {
   if (!dbConfigured()) {
     return json(
       { ok: false, error: "Applications are not open on this site yet." },
@@ -70,7 +90,11 @@ export async function POST(request: Request) {
   if (String(form.get("website") ?? "") !== "") return json({ ok: true });
 
   const text = (k: string) => String(form.get(k) ?? "").trim();
-  const name = text("name");
+  // one line, no control characters: the name ends up in email headers and the CSV
+  const name = text("name")
+    .replace(/[\u0000-\u001f\u007f]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
   const email = text("email").toLowerCase();
   const code = text("code").replace(/[^\d+]/g, "");
   const phoneDigits = text("phone").replace(/[^\d]/g, "");
@@ -84,7 +108,7 @@ export async function POST(request: Request) {
   const fields: Record<string, string> = {};
   if (name.length < 2 || name.length > 120)
     fields.name = "Please enter your full name.";
-  if (!/^\S+@\S+\.\S+$/.test(email) || email.length > 254)
+  if (!EMAIL.test(email) || email.length > 254)
     fields.email = "Please enter a valid email address.";
   if (phoneDigits.length < 6 || phoneDigits.length > 15)
     fields.phone = "Please enter a valid phone number.";
@@ -142,7 +166,20 @@ export async function POST(request: Request) {
     );
   }
 
-  const upload = await saveCv(file as File);
+  let upload: Awaited<ReturnType<typeof saveCv>>;
+  try {
+    upload = await saveCv(file as File);
+  } catch (e) {
+    console.error("[apply] could not store the CV:", e);
+    return json(
+      {
+        ok: false,
+        error:
+          "We could not save your application. Please try again in a moment.",
+      },
+      500,
+    );
+  }
   let id: number;
   try {
     id = await createApplication({
@@ -172,21 +209,25 @@ export async function POST(request: Request) {
     );
   }
 
-  // not awaited: a slow mail server must not slow the applicant down
-  void (async () => {
-    await sendApplicationMails({
-      id,
-      position,
-      name,
-      email,
-      phone: `${code} ${phoneDigits}`.trim(),
-      experienceYears: experience || null,
-      message: message || null,
-      cvName: upload.name,
-      cv: await readCv(upload.path),
-      cvMime: upload.mime,
-    });
-  })().catch((e) => console.error("[apply] mail step failed:", e));
+  // after the response is sent: a slow mail server must not make the applicant wait
+  after(async () => {
+    try {
+      await sendApplicationMails({
+        id,
+        position,
+        name,
+        email,
+        phone: `${code} ${phoneDigits}`.trim(),
+        experienceYears: experience || null,
+        message: message || null,
+        cvName: upload.name,
+        cv: await readCv(upload.path),
+        cvMime: upload.mime,
+      });
+    } catch (e) {
+      console.error("[apply] mail step failed:", e);
+    }
+  });
 
   return json({ ok: true });
 }

@@ -1,6 +1,6 @@
 import { getCvFile } from "@/lib/applications";
 import { hasSession } from "@/lib/auth";
-import { cleanName, readCv } from "@/lib/uploads";
+import { attachmentHeader, readCv } from "@/lib/uploads";
 
 /** Sends one applicant's CV to a signed-in admin. CV files are never reachable any other way. */
 export async function GET(
@@ -25,7 +25,7 @@ export async function GET(
   return new Response(new Uint8Array(body), {
     headers: {
       "Content-Type": cv.mime,
-      "Content-Disposition": `attachment; filename="${cleanName(cv.name)}"`,
+      "Content-Disposition": attachmentHeader(cv.name),
       "Content-Length": String(body.length),
       "X-Content-Type-Options": "nosniff",
       "Cache-Control": "private, no-store",

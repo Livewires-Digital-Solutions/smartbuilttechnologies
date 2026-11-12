@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { LoginForm } from "@/components/admin/LoginForm";
-import { StatusBadge, btnOutline, btnSignal } from "@/components/admin/ui";
+import { StatusBadge } from "@/components/admin/ui";
+import { btnOutline, btnSignal } from "@/components/admin/styles";
 import { APPLICATION_STATUSES } from "@/content/careers";
 import { listApplications, overview } from "@/lib/applications";
 import { adminConfigured, hasSession } from "@/lib/auth";

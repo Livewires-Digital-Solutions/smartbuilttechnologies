@@ -5,14 +5,13 @@ import {
   applicationStatusAction,
   deleteApplicationAction,
 } from "@/app/(admin)/sys-ops/actions";
+import { ConfirmSubmit, StatusBadge } from "@/components/admin/ui";
 import {
-  ConfirmSubmit,
-  StatusBadge,
   btnOutline,
   btnPrimary,
   btnSignal,
   inputCls,
-} from "@/components/admin/ui";
+} from "@/components/admin/styles";
 import { APPLICATION_STATUSES } from "@/content/careers";
 import { getApplication } from "@/lib/applications";
 import { requireAdmin } from "@/lib/auth";

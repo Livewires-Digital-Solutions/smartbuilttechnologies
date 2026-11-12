@@ -97,7 +97,7 @@ export async function sendApplicationMails(a: ApplicationMail) {
     await t.sendMail({
       from,
       to,
-      replyTo: `${a.name} <${a.email}>`,
+      replyTo: { name: a.name, address: a.email },
       subject: `New application: ${a.name}, ${a.position}`,
       text,
       html,
@@ -112,7 +112,7 @@ export async function sendApplicationMails(a: ApplicationMail) {
   try {
     await t.sendMail({
       from,
-      to: a.email,
+      to: { name: a.name, address: a.email },
       subject: `We have received your application, ${a.position}`,
       text: [
         `Hello ${a.name},`,

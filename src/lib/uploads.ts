@@ -51,7 +51,10 @@ export async function saveCv(file: File) {
   const dir = uploadDir();
   await mkdir(/*turbopackIgnore: true*/ dir, { recursive: true });
   const stored = `${randomUUID()}.${ext}`;
-  await writeFile(/*turbopackIgnore: true*/ path.join(dir, stored), bytes, { flag: "wx", mode: 0o640 });
+  await writeFile(/*turbopackIgnore: true*/ path.join(dir, stored), bytes, {
+    flag: "wx",
+    mode: 0o640,
+  });
   return { path: stored, mime, size: bytes.length, name: cleanName(file.name) };
 }
 
@@ -59,9 +62,17 @@ export async function saveCv(file: File) {
 export function cleanName(name: string) {
   const base = path
     .basename(name)
-    .replace(/[^\w.\- ()]+/g, "_")
+    // keep letters and digits in any script (Tamil, Arabic…), drop anything else risky
+    .replace(/[^\p{L}\p{M}\p{N}._\- ()]+/gu, "_")
     .trim();
   return (base || "cv").slice(0, 200);
+}
+
+/** A Content-Disposition value that keeps non-English file names intact in every browser. */
+export function attachmentHeader(name: string) {
+  const clean = cleanName(name);
+  const ascii = clean.replace(/[^\x20-\x7e]/g, "_").replace(/"/g, "");
+  return `attachment; filename="${ascii}"; filename*=UTF-8''${encodeURIComponent(clean)}`;
 }
 
 /** Resolves a stored name inside the upload folder, refusing anything that escapes it. */
