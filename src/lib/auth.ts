@@ -82,8 +82,11 @@ export async function endSession() {
 }
 
 export async function hasSession(): Promise<boolean> {
+  // Read the cookies first: that makes everything after it run at request time. Checking the
+  // settings before this would let a build with no settings freeze "not set up" into the page.
+  const jar = await cookies();
   if (!adminConfigured()) return false;
-  const raw = (await cookies()).get(COOKIE)?.value;
+  const raw = jar.get(COOKIE)?.value;
   if (!raw) return false;
   const [expires, sig] = raw.split(".");
   if (!expires || !sig) return false;
