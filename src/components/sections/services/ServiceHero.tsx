@@ -4,7 +4,7 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { ButtonLink } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
 import { Label, Stop } from "@/components/ui/Typography";
-import { pathwayById, PATHWAY_COLOUR } from "@/content/pathways";
+import { pathwayById } from "@/content/pathways";
 import type { ServiceDoc } from "@/content/service-pages";
 import { serviceBySlug } from "@/content/services";
 
@@ -15,7 +15,6 @@ import { serviceBySlug } from "@/content/services";
 export function ServiceHero({ doc }: { doc: ServiceDoc }) {
   const service = serviceBySlug(doc.slug);
   const pathway = pathwayById(service.pathway);
-  const colour = PATHWAY_COLOUR[pathway.id];
 
   return (
     <Section
@@ -76,27 +75,6 @@ export function ServiceHero({ doc }: { doc: ServiceDoc }) {
                   All services
                 </ButtonLink>
               </div>
-
-              <ul className="mt-1 border-t-[1.5px] border-t-navy">
-                {doc.tags.map((t, i) => (
-                  <li
-                    key={t}
-                    className="flex items-center gap-4 border-b border-[var(--hairline)] py-3"
-                  >
-                    <span className="w-6 font-mono text-overline text-slate-500">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span
-                      aria-hidden="true"
-                      className="size-3 shrink-0 rounded-[3px]"
-                      style={{ background: colour }}
-                    />
-                    <span className="text-[clamp(1.25rem,1rem+0.9vw,1.75rem)] leading-none font-medium tracking-[-0.035em]">
-                      {t}
-                    </span>
-                  </li>
-                ))}
-              </ul>
             </div>
           </div>
 
