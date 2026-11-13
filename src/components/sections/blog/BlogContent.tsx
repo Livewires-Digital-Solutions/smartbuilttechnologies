@@ -21,7 +21,7 @@ export function BlogSkeleton() {
       aria-label="Blog"
       className="pt-[var(--header-h)]"
     >
-      <div className="container-x min-h-[70svh] pt-16">
+      <div className="container-x min-h-[min(100svh,880px)] pt-16">
         <div className="h-24 w-2/3 animate-pulse bg-navy/8" />
         <div className="mt-10 h-5 w-1/2 animate-pulse bg-navy/8" />
       </div>

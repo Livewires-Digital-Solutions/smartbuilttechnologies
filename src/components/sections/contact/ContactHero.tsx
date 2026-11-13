@@ -101,12 +101,14 @@ export function ContactHero() {
                 {lines.map(([k, v]) => (
                   <div
                     key={k}
-                    className="grid grid-cols-[5rem_1fr] gap-4 border-b border-[var(--hairline)] py-3"
+                    className="grid grid-cols-[5rem_minmax(0,1fr)] gap-4 border-b border-[var(--hairline)] py-3"
                   >
                     <dt className="pt-1">
                       <Label className="text-slate-700">{k}</Label>
                     </dt>
-                    <dd className="text-[1.0625rem] font-medium">{v}</dd>
+                    <dd className="text-[1.0625rem] font-medium [overflow-wrap:anywhere]">
+                      {v}
+                    </dd>
                   </div>
                 ))}
               </dl>

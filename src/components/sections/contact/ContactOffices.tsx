@@ -91,7 +91,7 @@ export function ContactOffices() {
                         href={office.mapUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-2 font-semibold text-navy"
+                        className="inline-flex min-h-11 items-center gap-2 font-semibold text-navy"
                       >
                         <span className="underline underline-offset-[6px]">
                           View on Map

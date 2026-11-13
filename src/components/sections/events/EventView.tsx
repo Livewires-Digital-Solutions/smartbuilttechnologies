@@ -14,7 +14,7 @@ import { breadcrumbJsonLd, JsonLd } from "@/lib/jsonld";
 
 /** One event: the hero with when and where, and its write-up in Markdown. */
 export function EventView({ event }: { event: SiteEvent }) {
-  const base = process.env.SITE_URL || site.url;
+  const base = site.url;
   const when = dateRange(event.startDate, event.endDate);
   return (
     <>
@@ -22,8 +22,8 @@ export function EventView({ event }: { event: SiteEvent }) {
         data={[
           breadcrumbJsonLd([
             { name: "Home", path: "/" },
-            { name: "Events", path: "/insights" },
-            { name: event.title, path: `/insights/${event.slug}` },
+            { name: "Events", path: "/events" },
+            { name: event.title, path: `/events/${event.slug}` },
           ]),
           {
             "@context": "https://schema.org",
@@ -34,10 +34,19 @@ export function EventView({ event }: { event: SiteEvent }) {
             endDate: event.endDate ?? event.startDate,
             eventAttendanceMode:
               "https://schema.org/OfflineEventAttendanceMode",
-            location: { "@type": "Place", name: event.location },
+            eventStatus: "https://schema.org/EventScheduled",
+            location: {
+              "@type": "Place",
+              name: event.location,
+              address: event.location,
+            },
             image: event.cover ? `${base}${event.cover}` : undefined,
-            url: `${base}/insights/${event.slug}`,
-            organizer: { "@type": "Organization", name: site.group },
+            url: `${base}/events/${event.slug}`,
+            organizer: {
+              "@type": "Organization",
+              name: site.group,
+              url: site.groupUrl,
+            },
           },
         ]}
       />
@@ -60,7 +69,7 @@ export function EventView({ event }: { event: SiteEvent }) {
                   className="text-slate-700"
                   items={[
                     { label: "Home", href: "/" },
-                    { label: "Events", href: "/insights" },
+                    { label: "Events", href: "/events" },
                     { label: event.title },
                   ]}
                 />
@@ -130,8 +139,8 @@ export function EventView({ event }: { event: SiteEvent }) {
             <div className="grid-12 gap-y-8">
               <div className="col-span-12 lg:col-span-3">
                 <Link
-                  href="/insights"
-                  className="group inline-flex items-center gap-2 font-semibold text-navy"
+                  href="/events"
+                  className="group inline-flex min-h-11 items-center gap-2 font-semibold text-navy"
                 >
                   <Icon
                     name="arrow-left"
@@ -150,7 +159,7 @@ export function EventView({ event }: { event: SiteEvent }) {
                     Get in touch
                   </ButtonLink>
                   <ButtonLink
-                    href="/insights"
+                    href="/events"
                     variant="ghost"
                     className="underline"
                   >

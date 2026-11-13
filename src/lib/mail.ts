@@ -66,7 +66,7 @@ export async function sendApplicationMails(a: ApplicationMail) {
     .split(",")
     .map((s) => s.trim())
     .filter(Boolean);
-  const admin = `${process.env.SITE_URL ?? site.url}/sys-ops/applications/${a.id}`;
+  const admin = `${site.url}/sys-ops/applications/${a.id}`;
 
   const details: [string, string][] = [
     ["Position", a.position],

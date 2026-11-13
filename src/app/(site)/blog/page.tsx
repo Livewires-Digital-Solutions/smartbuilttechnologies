@@ -1,22 +1,25 @@
 import type { Metadata } from "next";
+import { site } from "@/content/site";
+import { pageMetadata } from "@/lib/seo";
 import { Suspense } from "react";
 import {
   BlogContent,
   BlogSkeleton,
 } from "@/components/sections/blog/BlogContent";
 import { HomeCta } from "@/components/sections/home/HomeCta";
-import { breadcrumbJsonLd, JsonLd } from "@/lib/jsonld";
+import { JsonLd, pageJsonLd } from "@/lib/jsonld";
 
-const title = "Blog | Smart Built Technologies, Production Firm of TXG, KSA";
+const title =
+  "BIM and Digital Twin Blog | Smart Built Technologies";
 const description =
-  "Deep dives into BIM, digital twin, scan to BIM, GIS integration and CAFM from Smart Built Technologies, the production firm of Technical Xperts Group (TXG) - Saudi Arabia, plus company news.";
+  "Articles on BIM, digital twins, scan to BIM, GIS integration and CAFM from Smart Built Technologies, the production firm of TXG - Saudi Arabia, plus company news.";
 
 export const metadata: Metadata = {
-  title: { absolute: title },
-  description,
-  alternates: { canonical: "/blog" },
-  openGraph: { title, description, url: "/blog", type: "website" },
-  twitter: { card: "summary_large_image", title, description },
+  ...pageMetadata({ title, description, path: "/blog" }),
+  alternates: {
+    canonical: "/blog",
+    types: { "application/rss+xml": "/blog/feed.xml" },
+  },
 };
 
 /** Blog index: the latest news and every article, read from the database. */
@@ -24,10 +27,24 @@ export default function BlogPage() {
   return (
     <>
       <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "Home", path: "/" },
-          { name: "Blog", path: "/blog" },
-        ])}
+        data={pageJsonLd({
+          path: "/blog",
+          name: title,
+          description,
+          type: "CollectionPage",
+          crumbs: [{ name: "Blog", path: "/blog" }],
+          extra: [
+            {
+              "@context": "https://schema.org",
+              "@type": "Blog",
+              "@id": `${site.url}/blog#blog`,
+              url: `${site.url}/blog`,
+              name: "Smart Built Technologies Blog",
+              inLanguage: "en-IN",
+              publisher: { "@id": `${site.url}/#organization` },
+            },
+          ],
+        })}
       />
       <div className="scroll-progress" aria-hidden="true" />
       <Suspense fallback={<BlogSkeleton />}>

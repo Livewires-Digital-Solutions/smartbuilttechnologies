@@ -96,7 +96,7 @@ export function HomeWhyBim() {
                     <p className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-1">
                       <Link
                         href={s.service.href}
-                        className="group inline-flex items-center gap-2 font-semibold"
+                        className="group inline-flex min-h-11 items-center gap-2 font-semibold"
                       >
                         <span className="underline underline-offset-[5px]">
                           {s.service.label}

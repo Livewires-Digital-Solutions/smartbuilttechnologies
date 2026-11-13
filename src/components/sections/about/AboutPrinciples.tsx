@@ -81,7 +81,7 @@ export function AboutPrinciples() {
                   <p className="pt-1">
                     <Link
                       href={v.link.href}
-                      className="group inline-flex items-center gap-2 font-semibold"
+                      className="group inline-flex min-h-11 items-center gap-2 font-semibold"
                     >
                       <span className="underline underline-offset-[5px]">
                         {v.link.label}

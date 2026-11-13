@@ -9,7 +9,7 @@ The careers pages, the blog, the events pages and the admin area read and write 
 | Admin area | `/sys-ops` (one shared login), kept out of search engines |
 | Database | `db/schema.sql`, applied with `npm run db:setup` |
 | CV files | `UPLOAD_DIR` (default `./storage/cv`), never inside `public/` |
-| Blog and events | `/blog`, `/blog/<post>`, `/insights` (events), `/insights/<event>`, managed at `/sys-ops/blog` and `/sys-ops/events` |
+| Blog and events | `/blog`, `/blog/<post>`, `/events` (events), `/events/<event>`, managed at `/sys-ops/blog` and `/sys-ops/events` |
 | Pictures | uploaded in the editors, stored in `MEDIA_DIR` (default `./storage/media`), served at `/media/<file>` |
 
 ## 1. Create the database
@@ -79,6 +79,10 @@ Sign in at `/sys-ops` and use **Blog** and **Events**.
 - **Starter content:** `npm run db:seed` loads the 6 articles, 1 news item and 7 events that came from txgksa.com, as published content you can edit. It is safe to run again: anything whose web address already exists is left exactly as it is, so your edits are never overwritten. The four 2023 articles are short teasers (as on txgksa.com); expand them in the editor.
 - **Pictures:** JPG, PNG or WebP up to 8 MB. Each upload is checked by its content (not just its name), resized to at most 2400 px, and stripped of camera data such as GPS location. SVG is refused because it can carry script.
 - **Home page:** the "What's happening" section shows the newest news item and the three newest articles, so publishing in the admin updates it straight away. If the database cannot be reached it falls back to the copy built into the site.
+
+## Privacy and retention
+
+The privacy notice at `/privacy` (draft, `src/content/privacy.ts`) promises to delete an application and its CV within 12 months of the position closing. Nothing does that automatically: open **Applications**, filter for the old ones and delete them (or export first), for example every quarter. See also `docs/seo-and-accessibility.md`.
 
 ## 7. What to back up
 

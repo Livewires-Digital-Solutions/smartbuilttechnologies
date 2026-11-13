@@ -47,9 +47,9 @@ function jobPostingJsonLd(job: Job) {
     employmentType: SCHEMA_TYPE[job.employmentType],
     hiringOrganization: {
       "@type": "Organization",
+      "@id": `${site.url}/#organization`,
       name: site.name,
       sameAs: site.url,
-      parentOrganization: site.group,
     },
     jobLocation: {
       "@type": "Place",
@@ -294,7 +294,7 @@ export function JobView({ job }: { job: Job }) {
                 </ButtonLink>
                 <Link
                   href="/careers#apply"
-                  className="group inline-flex items-center gap-2 font-semibold text-navy"
+                  className="group inline-flex min-h-11 items-center gap-2 font-semibold text-navy"
                 >
                   <span className="underline underline-offset-[6px]">
                     Send your CV anyway

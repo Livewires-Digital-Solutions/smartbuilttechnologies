@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { HomeCta } from "@/components/sections/home/HomeCta";
 import { ProjectsClients } from "@/components/sections/projects/ProjectsClients";
 import { ProjectsGallery } from "@/components/sections/projects/ProjectsGallery";
@@ -6,19 +7,18 @@ import { ProjectsHero } from "@/components/sections/projects/ProjectsHero";
 import { Section } from "@/components/ui/Section";
 import { projects, sectors } from "@/content/projects";
 import { site } from "@/content/site";
-import { breadcrumbJsonLd, JsonLd } from "@/lib/jsonld";
+import { JsonLd, pageJsonLd } from "@/lib/jsonld";
 
 const title =
-  "Projects | Smart Built Technologies, Production Firm of TXG, KSA";
-const description = `${projects.length} landmark BIM and digital construction projects associated with Technical Xperts Group (TXG) - Saudi Arabia: NEOM Bay Airport, KAFD, Sports Boulevard, Riyadh Metro and international projects in Australia.`;
+  `${projects.length} Landmark BIM Projects | Smart Built Technologies`;
+const description =
+  `${projects.length} landmark BIM and digital construction projects associated with Technical Xperts Group (TXG) - Saudi Arabia, including KAFD, Riyadh Metro and NEOM Bay Airport.`;
 
-export const metadata: Metadata = {
-  title: { absolute: title },
+export const metadata: Metadata = pageMetadata({
+  title,
   description,
-  alternates: { canonical: "/projects" },
-  openGraph: { title, description, url: "/projects", type: "website" },
-  twitter: { card: "summary_large_image", title, description },
-};
+  path: "/projects",
+});
 
 /** Sectors that have at least one project, in the order the filter shows them. */
 const usedSectors = sectors.filter((s) => projects.some((p) => p.sector === s));
@@ -32,10 +32,20 @@ export default function ProjectsPage() {
   return (
     <>
       <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "Home", path: "/" },
-          { name: "Projects", path: "/projects" },
-        ])}
+        data={pageJsonLd({
+          path: "/projects",
+          name: title,
+          description,
+          type: "CollectionPage",
+          crumbs: [{ name: "Projects", path: "/projects" }],
+          list: {
+            name: "Projects",
+            items: projects.map((p) => ({
+              name: p.name,
+              path: `/projects#${p.slug}`,
+            })),
+          },
+        })}
       />
       <div className="scroll-progress" aria-hidden="true" />
       <ProjectsHero />

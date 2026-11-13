@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import { connection } from "next/server";
 import { Suspense } from "react";
@@ -25,16 +26,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const job = await load((await params).slug);
   if (!job) return { title: "Position not found", robots: { index: false } };
-  const title = `${job.title} | Careers | Smart Built Technologies`;
-  const description = `${job.summary} ${job.location}. Apply to Smart Built Technologies, the production firm of Technical Xperts Group (TXG) - Saudi Arabia.`;
-  const path = `/careers/${job.slug}`;
-  return {
-    title: { absolute: title },
-    description,
-    alternates: { canonical: path },
-    openGraph: { title, description, url: path, type: "website" },
-    twitter: { card: "summary_large_image", title, description },
-  };
+  return pageMetadata({
+    title: `${job.title} | Careers | Smart Built Technologies`,
+    description: `${job.summary} ${job.location}. Apply to Smart Built Technologies, the production firm of Technical Xperts Group (TXG) - Saudi Arabia.`,
+    path: `/careers/${job.slug}`,
+  });
 }
 
 /** One position, read from the database when it is asked for. */

@@ -21,7 +21,7 @@ const variants: Record<ButtonVariant, string> = {
   inverse: "bg-white text-navy hover:bg-paper active:bg-white",
   outline: "border border-navy/25 text-navy hover:border-navy hover:bg-white",
   "outline-inverse": "border border-white/35 text-white hover:border-white hover:bg-white/8",
-  ghost: "px-0! h-auto! rounded-none text-current underline-offset-[6px] decoration-1 hover:underline",
+  ghost: "px-0! h-auto! min-h-11 rounded-none text-current underline-offset-[6px] decoration-1 hover:underline",
 };
 
 const sizes: Record<Size, string> = {

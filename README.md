@@ -37,6 +37,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Careers, blog and events
 
-The careers pages, the blog and events pages, the admin area (`/sys-ops`), MySQL, CV and picture storage and email are documented in [docs/careers-portal.md](docs/careers-portal.md).
+The careers pages, the blog and events pages, the admin area (`/sys-ops`), MySQL, CV and picture storage and email are documented in [docs/careers-portal.md](docs/careers-portal.md). Search, AI-answer and accessibility work, and what to do before launch, is in [docs/seo-and-accessibility.md](docs/seo-and-accessibility.md).
 
 After pulling new changes run `npm run db:setup` (adds any new tables; safe to repeat). On a fresh database also run `npm run db:seed` once to load the starter articles and events.

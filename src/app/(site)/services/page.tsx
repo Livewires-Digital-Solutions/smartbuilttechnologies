@@ -1,21 +1,22 @@
 import type { Metadata } from "next";
+import { services } from "@/content/services";
+import { pageMetadata } from "@/lib/seo";
 import { HomeCta } from "@/components/sections/home/HomeCta";
 import { HomeProjects } from "@/components/sections/home/HomeProjects";
 import { ServicesHero } from "@/components/sections/services/ServicesHero";
 import { ServicesList } from "@/components/sections/services/ServicesList";
-import { breadcrumbJsonLd, JsonLd } from "@/lib/jsonld";
+import { JsonLd, pageJsonLd } from "@/lib/jsonld";
 
-const title = "Services | Smart Built Technologies, Production Firm of TXG, KSA";
+const title =
+  "BIM & Digital Construction Services | Smart Built Technologies";
 const description =
-  "BIM in design, reality capture and scan to BIM, asset management, CAFM, digital twin, GIS, immersive solutions, 4D simulation and IT services, delivered from Chennai by the production firm of Technical Xperts Group (TXG) - Saudi Arabia.";
+  "BIM, scan to BIM, digital twin, CAFM, GIS, AR/VR/XR, 4D simulation and IT services from Smart Built Technologies, the production firm of TXG - Saudi Arabia.";
 
-export const metadata: Metadata = {
-  title: { absolute: title },
+export const metadata: Metadata = pageMetadata({
+  title,
   description,
-  alternates: { canonical: "/services" },
-  openGraph: { title, description, url: "/services", type: "website" },
-  twitter: { card: "summary_large_image", title, description },
-};
+  path: "/services",
+});
 
 /**
  * Services, built from the home page's moves: a pinned hero with one stage for
@@ -26,10 +27,20 @@ export default function ServicesPage() {
   return (
     <>
       <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "Home", path: "/" },
-          { name: "Services", path: "/services" },
-        ])}
+        data={pageJsonLd({
+          path: "/services",
+          name: title,
+          description,
+          type: "CollectionPage",
+          crumbs: [{ name: "Services", path: "/services" }],
+          list: {
+            name: "Services",
+            items: services.map((s) => ({
+              name: s.title,
+              path: `/services/${s.slug}`,
+            })),
+          },
+        })}
       />
       <div className="scroll-progress" aria-hidden="true" />
       <ServicesHero />

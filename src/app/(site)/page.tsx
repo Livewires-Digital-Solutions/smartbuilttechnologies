@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { HomeAbout } from "@/components/sections/home/HomeAbout";
 import { HomeClients } from "@/components/sections/home/HomeClients";
 import { HomeCta } from "@/components/sections/home/HomeCta";
@@ -11,17 +12,15 @@ import { HomeWhyBim } from "@/components/sections/home/HomeWhyBim";
 import { homeJsonLd, JsonLd } from "@/lib/jsonld";
 
 const title =
-  "BIM & Scan to BIM Services in Chennai | Smart Built Technologies";
+  "Smart Built Technologies | BIM and Digital Twin, Chennai";
 const description =
-  "Smart Built Technologies, the production firm of Technical Xperts Group (TXG) - Saudi Arabia, delivers BIM modelling, scan to BIM, digital twins and CAFM from Chennai for projects worldwide.";
+  "Smart Built Technologies is the production firm of Technical Xperts Group (TXG) - Saudi Arabia. BIM, scan to BIM, digital twin and CAFM from Chennai.";
 
-export const metadata: Metadata = {
-  title: { absolute: title },
+export const metadata: Metadata = pageMetadata({
+  title,
   description,
-  alternates: { canonical: "/" },
-  openGraph: { title, description, url: "/", type: "website" },
-  twitter: { card: "summary_large_image", title, description },
-};
+  path: "/",
+});
 
 /**
  * Home: hero, clients, about, services, why choose us, iconic

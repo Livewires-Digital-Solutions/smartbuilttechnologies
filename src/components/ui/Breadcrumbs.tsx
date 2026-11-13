@@ -19,7 +19,7 @@ export function Breadcrumbs({
               </span>
             ) : null}
             {item.href ? (
-              <Link href={item.href} className="opacity-70 transition-opacity hover:opacity-100">
+              <Link href={item.href} className="-my-2 inline-block py-2 opacity-70 transition-opacity hover:opacity-100">
                 {item.label}
               </Link>
             ) : (

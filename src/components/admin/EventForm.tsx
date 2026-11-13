@@ -79,7 +79,7 @@ export function EventForm({
         >
           <div className="flex items-center gap-2">
             <span className="shrink-0 text-[0.875rem] text-slate-700">
-              /insights/
+              /events/
             </span>
             <input
               name="slug"

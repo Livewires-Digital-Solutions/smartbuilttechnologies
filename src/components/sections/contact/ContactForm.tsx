@@ -9,7 +9,7 @@ import { cn } from "@/lib/cn";
 type Errors = Partial<Record<"name" | "email" | "message", string>>;
 
 const field =
-  "w-full border-0 border-b border-white/30 bg-transparent pb-3 text-[1.0625rem] text-white placeholder:text-white/40 focus:border-orange focus:outline-none aria-[invalid=true]:border-orange";
+  "w-full border-0 border-b border-white/55 bg-transparent pb-3 text-[1.0625rem] text-white placeholder:text-white/65 focus:border-orange focus-visible:outline-offset-4 aria-[invalid=true]:border-orange";
 
 /**
  * The enquiry form. There is no mail service behind the site yet, so Submit opens

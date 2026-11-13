@@ -129,7 +129,7 @@ export default async function EventsAdminPage({
                   </Link>
                   {e.status === "published" && e.body?.trim() ? (
                     <Link
-                      href={`/insights/${e.slug}`}
+                      href={`/events/${e.slug}`}
                       target="_blank"
                       className={btnOutline}
                     >

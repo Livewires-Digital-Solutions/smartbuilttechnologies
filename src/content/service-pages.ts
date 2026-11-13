@@ -148,9 +148,9 @@ export const serviceDocs: Record<ServiceSlug, ServiceDoc> = {
       height: 1333,
       alt: "Two BIM coordinators reviewing a federated building model on screen",
     },
-    seoTitle: "BIM Services, Building Information Modelling",
+    seoTitle: "BIM Services, 3D Modelling",
     seoDescription:
-      "ISO 19650-aligned BIM (Building Information Modelling) services: 3D modelling, clash detection, BIM implementation and project lifecycle management, delivered from Chennai.",
+      "BIM (Building Information Modelling) services that follow ISO 19650: 3D modelling, clash detection, BIM implementation and lifecycle management.",
     what: {
       label: "What is BIM?",
       title: "What is Building Information Modelling (BIM)?",
@@ -256,9 +256,9 @@ export const serviceDocs: Record<ServiceSlug, ServiceDoc> = {
       height: 1333,
       alt: "A surveyor setting up a total station to capture an existing site",
     },
-    seoTitle: "Reality Capture & Scan to BIM, LiDAR Scanning Services",
+    seoTitle: "Scan to BIM & Reality Capture",
     seoDescription:
-      "Precision Reality Capture and Scan to BIM services using advanced LiDAR scanning. Transform physical environments into accurate, intelligent BIM models for construction, renovation, and facility management.",
+      "Scan to BIM and reality capture with LiDAR: turn existing buildings and sites into accurate BIM models for construction, renovation and facility management.",
     what: {
       label: "What is Reality Capture?",
       title: "From Physical World to Digital Precision.",
@@ -353,9 +353,9 @@ export const serviceDocs: Record<ServiceSlug, ServiceDoc> = {
       height: 682,
       alt: "A technician scanning an asset tag in a server room",
     },
-    seoTitle: "Asset Management & Asset Tagging Services",
+    seoTitle: "Asset Management Systems",
     seoDescription:
-      "End-to-end asset management system implementation including CAFM/CMMS deployment, asset tagging (QR, barcode, RFID), digital asset registers, data migration, enterprise system integration, and reporting analytics.",
+      "Asset management system implementation: CAFM/CMMS deployment, QR, barcode and RFID asset tagging, digital asset registers and data migration.",
     what: {
       label: "What is Asset Management?",
       title: "Intelligent Systems for Asset Lifecycle Excellence.",
@@ -451,9 +451,9 @@ export const serviceDocs: Record<ServiceSlug, ServiceDoc> = {
       alt: "A technician with a handheld device checking an asset register",
       position: "20% 30%",
     },
-    seoTitle: "CAFM Implementation, Computer Aided Facility Management",
+    seoTitle: "CAFM Implementation Services",
     seoDescription:
-      "CAFM solutions that transform facility operations. Expert Computer Aided Facility Management implementation with centralized data management, asset tracking, real-time monitoring, and scalable solutions.",
+      "Computer Aided Facility Management (CAFM) implementation: centralised data, asset tracking, real-time monitoring and scalable solutions for facility operations.",
     what: {
       label: "What is CAFM?",
       title: "What is CAFM / Computer Aided Facility Management?",
@@ -537,9 +537,9 @@ export const serviceDocs: Record<ServiceSlug, ServiceDoc> = {
       height: 608,
       alt: "A facilities engineer with a tablet showing live building data over a campus",
     },
-    seoTitle: "Digital Twin for Smart Building Implementation & Integration",
+    seoTitle: "Digital Twin for Smart Buildings",
     seoDescription:
-      "Comprehensive Digital Twin solutions for smart buildings, integrating BMS and IoT devices for real-time monitoring, predictive maintenance, and enhanced building management.",
+      "Digital twin solutions for smart buildings that connect BMS and IoT data for real-time monitoring, predictive maintenance and better building management.",
     what: {
       label: "What is a Digital Twin?",
       title: "What is a Digital Twin?",
@@ -622,9 +622,9 @@ export const serviceDocs: Record<ServiceSlug, ServiceDoc> = {
       height: 551,
       alt: "A city at dusk with glowing data connections between buildings",
     },
-    seoTitle: "GIS Integration & Smart Cities, Spatial Data & Urban Intelligence",
+    seoTitle: "GIS Integration & Smart Cities",
     seoDescription:
-      "GIS technology to support smart city development. Expert GIS integration services including GIS and BIM integration, centralized data solutions, real-time data accessibility, and advanced surveying capabilities.",
+      "GIS integration for smart cities: GIS and BIM integration, centralised spatial data, real-time data access and advanced surveying capabilities.",
     what: {
       label: "What is GIS?",
       title: "What is GIS?",
@@ -719,9 +719,9 @@ export const serviceDocs: Record<ServiceSlug, ServiceDoc> = {
       height: 1432,
       alt: "A 3D model of a room held over architectural drawings",
     },
-    seoTitle: "Immersive Solutions, AR, VR & XR for BIM & Construction",
+    seoTitle: "AR, VR & XR for Construction",
     seoDescription:
-      "Augmented Reality (AR), Virtual Reality (VR), and Extended Reality (XR) solutions for BIM visualization, construction, facility management, training, and client presentations.",
+      "Augmented, virtual and extended reality (AR, VR, XR) for BIM visualisation, construction, facility management, training and client presentations.",
     what: {
       label: "What are Immersive Solutions?",
       title: "Experience Design Before Construction.",
@@ -816,9 +816,9 @@ export const serviceDocs: Record<ServiceSlug, ServiceDoc> = {
       height: 559,
       alt: "A site engineer checking the construction programme against the model on a tablet, with a building rising behind",
     },
-    seoTitle: "4D Construction & Logistics Simulation",
+    seoTitle: "4D Construction Simulation",
     seoDescription:
-      "4D construction simulation linking BIM models with project schedules for visual construction sequencing, logistics planning, clash avoidance, and progress monitoring.",
+      "4D construction simulation that links BIM models to project schedules for sequencing, logistics planning, clash avoidance and progress monitoring.",
     what: {
       label: "What is 4D Simulation?",
       title: "Visualize Construction Through Time.",
@@ -914,9 +914,9 @@ export const serviceDocs: Record<ServiceSlug, ServiceDoc> = {
       height: 574,
       alt: "An engineer using a touch interface of cloud, security and analytics tools",
     },
-    seoTitle: "IT Services & App Development, Digital Solutions",
+    seoTitle: "IT Services & App Development",
     seoDescription:
-      "Intelligent web applications, enterprise platforms, and mobile solutions for digital transformation.",
+      "Intelligent web applications, enterprise platforms and mobile solutions for digital transformation, delivered by Smart Built Technologies from Chennai.",
     what: {
       label: "App & Platform Development",
       title: "Accelerating Digital Transformation.",

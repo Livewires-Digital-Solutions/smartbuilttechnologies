@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import { connection } from "next/server";
 import { Suspense } from "react";
@@ -26,24 +27,25 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const post = await load((await params).slug);
   if (!post) return { title: "Article not found", robots: { index: false } };
-  const title = `${post.title} | Smart Built Technologies`;
-  const path = `/blog/${post.slug}`;
-  return {
-    title: { absolute: title },
+  const meta = pageMetadata({
+    title: `${post.title} | Smart Built Technologies`,
     description: post.excerpt,
-    alternates: { canonical: path },
+    path: `/blog/${post.slug}`,
+    type: "article",
+    image: post.cover
+      ? { src: post.cover, alt: post.coverAlt ?? post.title }
+      : null,
+  });
+  return {
+    ...meta,
     openGraph: {
-      title,
-      description: post.excerpt,
-      url: path,
+      ...meta.openGraph,
       type: "article",
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt,
-      images: post.cover
-        ? [{ url: post.cover, alt: post.coverAlt ?? post.title }]
-        : undefined,
+      authors: ["Smart Built Technologies"],
+      section: post.category ?? undefined,
     },
-    twitter: { card: "summary_large_image", title, description: post.excerpt },
   };
 }
 

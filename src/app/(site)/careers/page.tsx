@@ -1,23 +1,23 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { Suspense } from "react";
 import {
   CareersContent,
   OpeningsSkeleton,
 } from "@/components/sections/careers/CareersContent";
 import { CareersHero } from "@/components/sections/careers/CareersHero";
-import { breadcrumbJsonLd, JsonLd } from "@/lib/jsonld";
+import { JsonLd, pageJsonLd } from "@/lib/jsonld";
 
-const title = "Careers | Smart Built Technologies, Production Firm of TXG, KSA";
+const title =
+  "BIM Careers and Jobs | Smart Built Technologies";
 const description =
-  "Join Smart Built Technologies, the production firm of Technical Xperts Group (TXG) - Saudi Arabia, and shape the future of digital construction. We are hiring BIM Modellers, BIM Engineers, BIM Coordinators and Team Leaders across India and the Middle East. Apply today.";
+  "Join Smart Built Technologies. We are hiring BIM Modellers, BIM Engineers, BIM Coordinators and Team Leaders across India and the Middle East. Apply online.";
 
-export const metadata: Metadata = {
-  title: { absolute: title },
+export const metadata: Metadata = pageMetadata({
+  title,
   description,
-  alternates: { canonical: "/careers" },
-  openGraph: { title, description, url: "/careers", type: "website" },
-  twitter: { card: "summary_large_image", title, description },
-};
+  path: "/careers",
+});
 
 /**
  * Careers: a pinned hero on the three role families, the open positions (live from
@@ -27,10 +27,13 @@ export default function CareersPage() {
   return (
     <>
       <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "Home", path: "/" },
-          { name: "Careers", path: "/careers" },
-        ])}
+        data={pageJsonLd({
+          path: "/careers",
+          name: title,
+          description,
+          type: "CollectionPage",
+          crumbs: [{ name: "Careers", path: "/careers" }],
+        })}
       />
       <div className="scroll-progress" aria-hidden="true" />
       <CareersHero />

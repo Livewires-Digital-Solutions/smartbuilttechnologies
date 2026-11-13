@@ -11,7 +11,7 @@ export const mainNav: NavLink[] = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Projects", href: "/projects" },
-  { label: "Events", href: "/insights" },
+  { label: "Events", href: "/events" },
   { label: "Blog", href: "/blog" },
   { label: "Careers", href: "/careers" },
 ];
@@ -45,7 +45,7 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
     links: [
       { label: "About", href: "/about" },
       { label: "Projects", href: "/projects" },
-      { label: "Events", href: "/insights" },
+      { label: "Events", href: "/events" },
       { label: "Careers", href: "/careers" },
       { label: "Contact", href: "/contact" },
     ],

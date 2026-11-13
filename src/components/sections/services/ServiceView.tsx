@@ -11,20 +11,20 @@ import { ServiceWhy } from "@/components/sections/services/ServiceWhy";
 import { serviceDocs } from "@/content/service-pages";
 import type { ServiceSlug } from "@/content/services";
 import { site } from "@/content/site";
-import { breadcrumbJsonLd, JsonLd } from "@/lib/jsonld";
+import { JsonLd, pageJsonLd } from "@/lib/jsonld";
+import { pageMetadata } from "@/lib/seo";
 
 /** Search metadata for one service page. */
 export function serviceMetadata(slug: ServiceSlug): Metadata {
   const doc = serviceDocs[slug];
-  const title = `${doc.seoTitle} | Smart Built Technologies, Production Firm of TXG, KSA`;
-  const path = `/services/${slug}`;
-  return {
-    title: { absolute: title },
+  return pageMetadata({
+    title: `${doc.seoTitle} | ${site.name}`,
     description: doc.seoDescription,
-    alternates: { canonical: path },
-    openGraph: { title, description: doc.seoDescription, url: path, type: "website" },
-    twitter: { card: "summary_large_image", title, description: doc.seoDescription },
-  };
+    path: `/services/${slug}`,
+    image: doc.image
+      ? { src: doc.image.src, alt: doc.image.alt, width: doc.image.width, height: doc.image.height }
+      : null,
+  });
 }
 
 /**
@@ -48,21 +48,32 @@ export function ServiceView({ slug }: { slug: ServiceSlug }) {
   return (
     <>
       <JsonLd
-        data={[
-          breadcrumbJsonLd([
-            { name: "Home", path: "/" },
+        data={pageJsonLd({
+          path: `/services/${slug}`,
+          name: doc.crumb,
+          description: doc.seoDescription,
+          crumbs: [
             { name: "Services", path: "/services" },
             { name: doc.crumb, path: `/services/${slug}` },
-          ]),
-          {
-            "@context": "https://schema.org",
-            "@type": "Service",
-            name: doc.crumb,
-            description: doc.seoDescription,
-            url: `${site.url}/services/${slug}`,
-            provider: { "@id": `${site.url}/#organization` },
-          },
-        ]}
+          ],
+          extra: [
+            {
+              "@context": "https://schema.org",
+              "@type": "Service",
+              "@id": `${site.url}/services/${slug}#service`,
+              name: doc.crumb,
+              serviceType: doc.crumb,
+              description: doc.seoDescription,
+              url: `${site.url}/services/${slug}`,
+              image: doc.image ? `${site.url}${doc.image.src}` : undefined,
+              provider: { "@id": `${site.url}/#organization` },
+              areaServed: ["Saudi Arabia", "United Arab Emirates", "India"].map(
+                (name) => ({ "@type": "Country", name }),
+              ),
+              mainEntityOfPage: { "@id": `${site.url}/services/${slug}#webpage` },
+            },
+          ],
+        })}
       />
       <div className="scroll-progress" aria-hidden="true" />
       <ServiceHero doc={doc} />

@@ -52,11 +52,14 @@ export function PageHero({
               </Label>
             </div>
             <div className="flex flex-1 flex-col justify-center gap-[clamp(1rem,2.4svh,1.5rem)] py-8">
-              <h1 id={id} className="flex flex-col gap-3">
-                <span className="font-mono text-overline font-medium text-slate-700 uppercase">
+              <div className="flex flex-col gap-3">
+                <p className="font-mono text-overline font-medium text-slate-700 uppercase">
                   {kicker}
-                </span>
-                <span className="text-[clamp(2.75rem,min(6.3vw,10svh),7rem)] leading-[0.93] font-medium tracking-[-0.06em]">
+                </p>
+                <h1
+                  id={id}
+                  className="text-[clamp(2.75rem,min(6.3vw,10svh),7rem)] leading-[0.93] font-medium tracking-[-0.06em]"
+                >
                   {headline.map((line, i) => (
                     <span
                       key={line}
@@ -69,8 +72,8 @@ export function PageHero({
                       </span>
                     </span>
                   ))}
-                </span>
-              </h1>
+                </h1>
+              </div>
               <p className="max-w-[50ch] text-[1.0625rem] leading-snug text-slate-700">
                 {lede}
               </p>

@@ -1,5 +1,8 @@
 import type { NextConfig } from "next";
 
+// The client-review copy on Vercel must never be indexed; the real site (the VPS) is.
+const reviewCopy = Boolean(process.env.VERCEL);
+
 const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
@@ -17,6 +20,13 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  // The events pages used to live under /insights; keep old links working
+  async redirects() {
+    return [
+      { source: "/insights", destination: "/events", permanent: true },
+      { source: "/insights/:slug", destination: "/events/:slug", permanent: true },
+    ];
+  },
   async headers() {
     return [
       {
@@ -26,6 +36,7 @@ const nextConfig: NextConfig = {
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+          ...(reviewCopy ? [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] : []),
         ],
       },
     ];

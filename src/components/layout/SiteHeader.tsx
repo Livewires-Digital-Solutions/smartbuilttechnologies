@@ -21,6 +21,8 @@ export function SiteHeader({ logo, contactHref = "/contact" }: { logo: ReactNode
   const pathname = usePathname();
   const headerRef = useRef<HTMLElement>(null);
   const servicesBtnRef = useRef<HTMLButtonElement>(null);
+  const menuBtnRef = useRef<HTMLButtonElement>(null);
+  const sheetRef = useRef<HTMLDivElement>(null);
   const hoverTimer = useRef<number | undefined>(undefined);
   const panelId = useId();
   const mobileId = useId();
@@ -76,6 +78,8 @@ export function SiteHeader({ logo, contactHref = "/contact" }: { logo: ReactNode
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== "Escape") return;
       if (servicesOpen) servicesBtnRef.current?.focus();
+      // keyboard users land back on the button that opened the menu
+      else if (mobileOpen) menuBtnRef.current?.focus();
       setServicesOpen(false);
       setMobileOpen(false);
     };
@@ -96,6 +100,8 @@ export function SiteHeader({ logo, contactHref = "/contact" }: { logo: ReactNode
     const main = document.getElementById("main");
     const footer = document.getElementById("site-footer");
     root.style.overflow = mobileOpen ? "hidden" : "";
+    // moving focus into the dialog as it opens, so keyboard and screen reader users start inside it
+    if (mobileOpen) sheetRef.current?.querySelector<HTMLElement>("a, summary, button")?.focus();
     main?.toggleAttribute("inert", mobileOpen);
     footer?.toggleAttribute("inert", mobileOpen);
     return () => {
@@ -148,6 +154,7 @@ export function SiteHeader({ logo, contactHref = "/contact" }: { logo: ReactNode
                     className="nav-link inline-flex items-center gap-1.5"
                     aria-expanded={servicesOpen}
                     aria-controls={panelId}
+                    aria-current={isActive("/services") ? "true" : undefined}
                     data-active={isActive("/services") ? "true" : undefined}
                     onClick={() => setServicesOpen((o) => !o)}
                   >
@@ -184,6 +191,7 @@ export function SiteHeader({ logo, contactHref = "/contact" }: { logo: ReactNode
             <Icon name="arrow-up-right" size={16} />
           </Link>
           <button
+            ref={menuBtnRef}
             type="button"
             className="menu-toggle inline-flex h-11 items-center gap-2 px-3 text-sm font-semibold lg:hidden"
             aria-expanded={mobileOpen}
@@ -259,6 +267,7 @@ export function SiteHeader({ logo, contactHref = "/contact" }: { logo: ReactNode
       {/* Mobile sheet */}
       <div
         id={mobileId}
+        ref={sheetRef}
         className="mobile-sheet fixed inset-x-0 top-[var(--header-h)] bottom-0 overflow-y-auto overscroll-contain lg:hidden"
         data-state={mobileOpen ? "open" : "closed"}
         data-surface="dark"
@@ -300,7 +309,7 @@ export function SiteHeader({ logo, contactHref = "/contact" }: { logo: ReactNode
                           </ul>
                         </div>
                       ))}
-                      <Link href="/services" className="inline-flex items-center gap-2 font-semibold">
+                      <Link href="/services" className="inline-flex min-h-11 items-center gap-2 font-semibold">
                         All services <Icon name="arrow-right" size={16} />
                       </Link>
                     </div>

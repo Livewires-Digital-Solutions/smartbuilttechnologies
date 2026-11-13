@@ -142,7 +142,7 @@ function NewsView({
               <Label>Latest articles</Label>
               <Link
                 href="/blog"
-                className="text-[0.875rem] font-semibold underline underline-offset-[5px]"
+                className="-my-2 inline-block py-2 text-[0.875rem] font-semibold underline underline-offset-[5px]"
               >
                 All articles
               </Link>

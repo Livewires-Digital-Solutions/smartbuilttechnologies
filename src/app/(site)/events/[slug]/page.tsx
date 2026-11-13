@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import { connection } from "next/server";
 import { Suspense } from "react";
@@ -27,26 +28,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const e = await load((await params).slug);
   if (!e) return { title: "Event not found", robots: { index: false } };
-  const title = `${e.title} | Events | Smart Built Technologies`;
-  const description =
-    e.summary ??
-    `${e.title}, ${dateRange(e.startDate, e.endDate)}, ${e.location}.`;
-  const path = `/insights/${e.slug}`;
-  return {
-    title: { absolute: title },
-    description,
-    alternates: { canonical: path },
-    openGraph: {
-      title,
-      description,
-      url: path,
-      type: "website",
-      images: e.cover
-        ? [{ url: e.cover, alt: e.coverAlt ?? e.title }]
-        : undefined,
-    },
-    twitter: { card: "summary_large_image", title, description },
-  };
+  return pageMetadata({
+    title: `${e.title} | Events | Smart Built Technologies`,
+    description:
+      e.summary ??
+      `${e.title}, ${dateRange(e.startDate, e.endDate)}, ${e.location}.`,
+    path: `/events/${e.slug}`,
+    image: e.cover ? { src: e.cover, alt: e.coverAlt ?? e.title } : null,
+  });
 }
 
 /** One event, read from the database when it is asked for. */

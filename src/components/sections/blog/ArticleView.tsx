@@ -15,7 +15,7 @@ import { readingMinutes, type Post } from "@/lib/posts";
 
 /** Search-engine data for one post, with an absolute picture address. */
 function articleJsonLd(post: Post) {
-  const base = process.env.SITE_URL || site.url;
+  const base = site.url;
   const url = `${base}/blog/${post.slug}`;
   return {
     "@context": "https://schema.org",
@@ -30,14 +30,17 @@ function articleJsonLd(post: Post) {
     dateModified: post.updatedAt,
     articleSection: post.category ?? undefined,
     wordCount: post.body.trim().split(/\s+/).length,
-    author: { "@type": "Organization", name: site.name },
+    // named in full as well as by @id, because some readers do not join separate blocks
+    author: { "@type": "Organization", "@id": `${base}/#organization`, name: site.name, url: base },
     publisher: {
       "@type": "Organization",
+      "@id": `${base}/#organization`,
       name: site.name,
-      parentOrganization: site.group,
+      url: base,
       logo: { "@type": "ImageObject", url: `${base}/icon.svg` },
     },
-    inLanguage: "en",
+    isPartOf: { "@id": `${base}/blog#blog` },
+    inLanguage: "en-IN",
   };
 }
 
@@ -161,7 +164,7 @@ export function ArticleView({
             <div className="col-span-12 lg:col-span-3">
               <Link
                 href="/blog"
-                className="group inline-flex items-center gap-2 font-semibold text-navy"
+                className="group inline-flex min-h-11 items-center gap-2 font-semibold text-navy"
               >
                 <Icon
                   name="arrow-left"

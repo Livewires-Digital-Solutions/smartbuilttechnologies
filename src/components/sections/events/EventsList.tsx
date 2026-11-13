@@ -58,7 +58,7 @@ function Card({ e, priority }: { e: ListEvent; priority?: boolean }) {
   );
   const cls = "group flex flex-col gap-4 border-t-[1.5px] border-t-navy pt-4";
   return e.hasPage ? (
-    <Link href={`/insights/${e.slug}`} className={cls}>
+    <Link href={`/events/${e.slug}`} className={cls}>
       {inner}
     </Link>
   ) : (

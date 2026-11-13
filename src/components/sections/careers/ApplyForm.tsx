@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useId, useRef, useState, type DragEvent, type FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
 import { Label } from "@/components/ui/Typography";
@@ -27,7 +28,7 @@ type Errors = Partial<
 >;
 
 const field =
-  "w-full border-0 border-b border-white/30 bg-transparent pb-3 text-[1.0625rem] text-white placeholder:text-white/40 focus:border-orange focus:outline-none aria-[invalid=true]:border-orange";
+  "w-full border-0 border-b border-white/55 bg-transparent pb-3 text-[1.0625rem] text-white placeholder:text-white/65 focus:border-orange focus-visible:outline-offset-4 aria-[invalid=true]:border-orange";
 
 const sizeLabel = (n: number) =>
   n < 1024 * 1024
@@ -302,7 +303,7 @@ export function ApplyForm({
       {fixed ? (
         <div className="flex flex-col gap-2">
           <Label className="text-white/70">Position</Label>
-          <p className="border-b border-white/30 pb-3 text-[1.0625rem] font-medium">
+          <p className="border-b border-white/55 pb-3 text-[1.0625rem] font-medium">
             {fixed.title}
           </p>
         </div>
@@ -468,13 +469,20 @@ export function ApplyForm({
           <input
             type="checkbox"
             name="consent"
-            className="mt-1 size-4 shrink-0 accent-orange"
+            className="mt-0.5 size-6 shrink-0 accent-orange"
             aria-invalid={!!errors.consent}
             aria-describedby={errors.consent ? `${id}-consent-err` : undefined}
           />
           <span>
             I agree that Smart Built Technologies may store my details and CV to
-            process my application and contact me about it.
+            process my application and contact me about it. See{" "}
+            <Link
+              href="/privacy"
+              className="font-semibold text-white underline underline-offset-[5px]"
+            >
+              how we handle your data
+            </Link>
+            .
           </span>
         </label>
         {err("consent")}

@@ -31,7 +31,7 @@ export default async function EditEventPage({
           <PublishBadge status={event.status} />
           {event.status === "published" && event.body?.trim() ? (
             <Link
-              href={`/insights/${event.slug}`}
+              href={`/events/${event.slug}`}
               target="_blank"
               className="text-[0.9375rem] font-semibold underline underline-offset-[5px]"
             >

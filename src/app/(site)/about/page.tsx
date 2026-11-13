@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { AboutFaq } from "@/components/sections/about/AboutFaq";
 import { AboutHero } from "@/components/sections/about/AboutHero";
 import { AboutOffices } from "@/components/sections/about/AboutOffices";
@@ -6,19 +7,18 @@ import { AboutPrinciples } from "@/components/sections/about/AboutPrinciples";
 import { AboutStory } from "@/components/sections/about/AboutStory";
 import { HomeCta } from "@/components/sections/home/HomeCta";
 import { HomeProjects } from "@/components/sections/home/HomeProjects";
-import { breadcrumbJsonLd, JsonLd } from "@/lib/jsonld";
+import { JsonLd, pageJsonLd } from "@/lib/jsonld";
 
-const title = "About Us | Smart Built Technologies, Production Firm of TXG, KSA";
+const title =
+  "About Smart Built Technologies, Production Firm of TXG";
 const description =
-  "Smart Built Technologies is the production firm of Technical Xperts Group (TXG) - Saudi Arabia. Meet the group, its Chennai production centre, its offices and the landmark projects behind our BIM and digital delivery.";
+  "Meet Smart Built Technologies, the production firm of Technical Xperts Group (TXG) - Saudi Arabia: our Chennai production centre, group offices and track record.";
 
-export const metadata: Metadata = {
-  title: { absolute: title },
+export const metadata: Metadata = pageMetadata({
+  title,
   description,
-  alternates: { canonical: "/about" },
-  openGraph: { title, description, url: "/about", type: "website" },
-  twitter: { card: "summary_large_image", title, description },
-};
+  path: "/about",
+});
 
 /**
  * About, built from the home page's own moves: a pinned hero that travels the
@@ -29,10 +29,13 @@ export default function AboutPage() {
   return (
     <>
       <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "Home", path: "/" },
-          { name: "About", path: "/about" },
-        ])}
+        data={pageJsonLd({
+          path: "/about",
+          name: title,
+          description,
+          type: "AboutPage",
+          crumbs: [{ name: "About", path: "/about" }],
+        })}
       />
       <div className="scroll-progress" aria-hidden="true" />
       <AboutHero />

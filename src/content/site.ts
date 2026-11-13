@@ -22,8 +22,8 @@ export const site = {
   /** Short form for labels, tags and chips where the full name does not fit */
   groupLabel: "TXG, KSA",
   groupUrl: "https://txgksa.com",
-  /** PLACEHOLDER — final domain */
-  url: "https://www.smartbuilttech.com",
+  /** PLACEHOLDER — final domain. On the server, SITE_URL (see .env.example) wins. */
+  url: (process.env.SITE_URL || "https://www.smartbuilttech.com").replace(/\/+$/, ""),
   description:
     "Smart Built Technologies is the production firm of Technical Xperts Group (TXG) - Saudi Arabia, operating from a newly opened production centre in Chennai. BIM, reality capture, digital twins and facility systems for landmark buildings.",
   locale: "en_IN",
