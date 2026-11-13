@@ -47,7 +47,7 @@ export function PageHero({
           <div className="relative z-10 col-span-12 flex flex-col lg:col-span-7 lg:pr-10">
             <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 border-t border-b border-t-navy border-b-[var(--hairline)] py-2.5">
               <Label>{headerLabel}</Label>
-              <Label className="text-slate-700">
+              <Label className="text-slate-700 lg:hidden">
                 The production firm of TXG, KSA
               </Label>
             </div>
@@ -81,7 +81,12 @@ export function PageHero({
           </div>
 
           <figure className="relative col-span-12 flex flex-col lg:col-span-5">
-            <div className="relative min-h-[320px] flex-1 overflow-hidden bg-slate-200 max-lg:aspect-[4/3]">
+            <div className="hidden items-center justify-end border-t border-b border-t-navy border-b-[var(--hairline)] py-2.5 lg:flex">
+              <Label className="text-slate-700">
+                The production firm of TXG, KSA
+              </Label>
+            </div>
+            <div className="relative min-h-[320px] flex-1 overflow-hidden bg-slate-200 max-lg:aspect-[4/3] lg:mt-4">
               <Image
                 src={figure.src}
                 alt={figure.alt}

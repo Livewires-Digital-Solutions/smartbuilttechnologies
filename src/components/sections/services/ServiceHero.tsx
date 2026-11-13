@@ -79,7 +79,8 @@ export function ServiceHero({ doc }: { doc: ServiceDoc }) {
           </div>
 
           <figure className="relative col-span-12 flex flex-col lg:col-span-5">
-            <div className="relative min-h-[320px] flex-1 overflow-hidden bg-slate-200 max-lg:aspect-[4/3]">
+            <div className="hidden items-center justify-end border-t border-b border-t-navy border-b-[var(--hairline)] py-2.5 lg:flex"></div>
+            <div className="relative min-h-[320px] flex-1 overflow-hidden bg-slate-200 max-lg:aspect-[4/3] lg:mt-4">
               {doc.image ? (
                 <Image
                   src={doc.image.src}
@@ -98,7 +99,6 @@ export function ServiceHero({ doc }: { doc: ServiceDoc }) {
             </div>
             <figcaption className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 py-3">
               <Label className="text-slate-700">Fig. 01 · {doc.tags[0]}</Label>
-              <Label className="text-slate-700">The production firm of TXG, KSA</Label>
             </figcaption>
           </figure>
         </div>
