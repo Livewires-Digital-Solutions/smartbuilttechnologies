@@ -1,0 +1,93 @@
+[
+  {
+    "slug": "saudi-airport-exhibition-2024",
+    "title": "Saudi Airport Exhibition 2024",
+    "type": "Exhibition",
+    "startDate": "2024-11-11",
+    "endDate": "2024-11-12",
+    "location": "Riyadh, KSA",
+    "cover": "/assets/events/saudi-airport-exhibition-2024.jpg",
+    "coverAlt": "Saudi Airport Exhibition 2024",
+    "summary": null,
+    "body": null,
+    "status": "published"
+  },
+  {
+    "slug": "construction-technology-confex-ksa-2024",
+    "title": "Construction Technology Confex KSA 2024",
+    "type": "Conference",
+    "startDate": "2024-10-23",
+    "endDate": null,
+    "location": "Riyadh, KSA",
+    "cover": "/assets/events/construction-technology-confex-ksa-2024.jpg",
+    "coverAlt": "Construction Technology Confex KSA 2024",
+    "summary": null,
+    "body": null,
+    "status": "published"
+  },
+  {
+    "slug": "autodesk-technology-day-2024",
+    "title": "Autodesk Technology Day",
+    "type": "Technology showcase",
+    "startDate": "2024-02-22",
+    "endDate": null,
+    "location": "Riyadh, KSA",
+    "cover": "/assets/events/autodesk-technology-day.jpg",
+    "coverAlt": "Autodesk Technology Day",
+    "summary": null,
+    "body": null,
+    "status": "published"
+  },
+  {
+    "slug": "world-defense-show-2024",
+    "title": "World Defense Show 2024",
+    "type": "Exhibition",
+    "startDate": "2024-02-04",
+    "endDate": "2024-02-08",
+    "location": "Riyadh, KSA",
+    "cover": "/assets/events/world-defense-show-2024.webp",
+    "coverAlt": "World Defense Show 2024",
+    "summary": null,
+    "body": null,
+    "status": "published"
+  },
+  {
+    "slug": "saudi-airport-exhibition-2023",
+    "title": "Saudi Airport Exhibition 2023",
+    "type": "Exhibition",
+    "startDate": "2023-12-19",
+    "endDate": "2023-12-20",
+    "location": "Riyadh, KSA",
+    "cover": "/assets/events/saudi-airport-exhibition-2023.jpg",
+    "coverAlt": "Saudi Airport Exhibition 2023",
+    "summary": null,
+    "body": null,
+    "status": "published"
+  },
+  {
+    "slug": "10th-anniversary-riyadh",
+    "title": "Tenth anniversary — Riyadh",
+    "type": "Company milestone",
+    "startDate": "2023-11-30",
+    "endDate": null,
+    "location": "Riyadh, KSA",
+    "cover": "/assets/events/10th-anniversary-event-riyadh.jpg",
+    "coverAlt": "Tenth anniversary — Riyadh",
+    "summary": null,
+    "body": null,
+    "status": "published"
+  },
+  {
+    "slug": "ifsec-international-2023",
+    "title": "IFSEC International 2023",
+    "type": "Exhibition",
+    "startDate": "2023-05-16",
+    "endDate": "2023-05-18",
+    "location": "London, UK",
+    "cover": "/assets/events/ifsec-international-2023.jpg",
+    "coverAlt": "IFSEC International 2023",
+    "summary": null,
+    "body": null,
+    "status": "published"
+  }
+]

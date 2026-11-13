@@ -11,7 +11,8 @@
     "assets:migrate": "node scripts/migrate-assets.mjs",
     "db:setup": "node scripts/db-setup.mjs",
     "admin:hash": "node scripts/admin-hash.mjs",
-    "shots": "node scripts/shoot.mjs shots http://localhost:3100"
+    "shots": "node scripts/shoot.mjs shots http://localhost:3100",
+    "db:seed": "node scripts/db-seed.mjs"
   },
   "dependencies": {
     "@types/three": "^0.187.0",
@@ -22,6 +23,9 @@
     "nodemailer": "^10.5.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "sharp": "^0.35.5",
     "tailwind-merge": "^3.7.0",
     "three": "^0.187.0"
   },

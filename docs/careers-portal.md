@@ -1,6 +1,6 @@
-# Careers portal: setup and running on a VPS
+# Careers, blog and events: setup and running on a VPS
 
-The careers pages and the admin area read and write **MySQL** (MariaDB 10.6+ also works), save CVs to **disk** on the server and send email through **nodemailer** (SMTP). Nothing here depends on Vercel.
+The careers pages, the blog, the events pages and the admin area read and write **MySQL** (MariaDB 10.6+ also works), save CVs to **disk** on the server and send email through **nodemailer** (SMTP). Nothing here depends on Vercel.
 
 | Part | Where |
 | --- | --- |
@@ -9,6 +9,8 @@ The careers pages and the admin area read and write **MySQL** (MariaDB 10.6+ als
 | Admin area | `/sys-ops` (one shared login), kept out of search engines |
 | Database | `db/schema.sql`, applied with `npm run db:setup` |
 | CV files | `UPLOAD_DIR` (default `./storage/cv`), never inside `public/` |
+| Blog and events | `/blog`, `/blog/<post>`, `/insights` (events), `/insights/<event>`, managed at `/sys-ops/blog` and `/sys-ops/events` |
+| Pictures | uploaded in the editors, stored in `MEDIA_DIR` (default `./storage/media`), served at `/media/<file>` |
 
 ## 1. Create the database
 
@@ -34,6 +36,7 @@ Copy `.env.example` to `.env` on the server and fill it in. The important values
 ```bash
 npm ci
 npm run db:setup      # safe to run again: every statement is CREATE ... IF NOT EXISTS
+npm run db:seed       # first time only: loads the starter articles and events (see below)
 npm run build
 npm run start         # or: npx next start -p 3000
 ```
@@ -45,7 +48,7 @@ Keep it running with your process manager (systemd or pm2), for example `pm2 sta
 ```nginx
 server {
   server_name www.smartbuilttech.com;
-  client_max_body_size 6m;                      # CVs are at most 5 MB
+  client_max_body_size 10m;                     # CVs are at most 5 MB, pictures at most 8 MB
 
   location / {
     proxy_pass http://127.0.0.1:3000;
@@ -66,13 +69,25 @@ Sign in at `/sys-ops`.
 - **Applications**: search and filter, open an applicant, download the CV, move them through New, Reviewing, Shortlisted, Interview, Offered, Hired or Rejected, keep private notes, delete, or export a CSV of the current filter.
 - Changes show on the public site immediately; there is nothing to rebuild.
 
-## 6. What to back up
+## 6. Blog and events
 
-The **database** and the **`UPLOAD_DIR` folder**, together. An application row points at a CV file by name.
+Sign in at `/sys-ops` and use **Blog** and **Events**.
+
+- **Writing:** text is Markdown, with a toolbar (headings, bold, links, lists, quotes), a live preview that matches the public site, and **Add picture**, which uploads a picture and writes it into the text where the cursor is. A post or event can also have a cover picture.
+- **Status:** a post or event is *draft* (hidden) or *published*. A post dated in the future stays hidden until that day. An event moves from "Upcoming" to "Where we have been" by itself once its last day has passed.
+- **Events with a page:** an event's card links to its own page only if you write something in "About the event".
+- **Starter content:** `npm run db:seed` loads the 6 articles, 1 news item and 7 events that came from txgksa.com, as published content you can edit. It is safe to run again: anything whose web address already exists is left exactly as it is, so your edits are never overwritten. The four 2023 articles are short teasers (as on txgksa.com); expand them in the editor.
+- **Pictures:** JPG, PNG or WebP up to 8 MB. Each upload is checked by its content (not just its name), resized to at most 2400 px, and stripped of camera data such as GPS location. SVG is refused because it can carry script.
+- **Home page:** the "What's happening" section shows the newest news item and the three newest articles, so publishing in the admin updates it straight away. If the database cannot be reached it falls back to the copy built into the site.
+
+## 7. What to back up
+
+The **database**, the **`UPLOAD_DIR` folder** (CVs) and the **`MEDIA_DIR` folder** (pictures), together. An application row points at a CV file by name, and a post's cover or body points at a picture by name.
 
 ## Limits and behaviour worth knowing
 
 - CVs: PDF, DOC or DOCX, up to 5 MB, checked by extension *and* file content.
+- Pictures: JPG, PNG or WebP, up to 8 MB (`MEDIA_DIR`); raise nginx `client_max_body_size` above that, as shown.
 - Applications: 10 per IP address per hour (`APPLY_RATE_LIMIT_PER_HOUR`); the same email cannot apply to the same position twice within a day.
 - Admin login: 6 wrong attempts per 15 minutes per address, then a wait. Counters are in memory and reset when the server restarts.
 - The login cookie lasts 8 hours and is signed, `HttpOnly` and `SameSite=Strict`.

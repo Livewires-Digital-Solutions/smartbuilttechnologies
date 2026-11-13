@@ -6,7 +6,9 @@ import { APPLICATION_STATUSES } from "@/content/careers";
 import { listApplications, overview } from "@/lib/applications";
 import { adminConfigured, hasSession } from "@/lib/auth";
 import { dbConfigured } from "@/lib/db";
+import { eventCounts } from "@/lib/events";
 import { fmtDateTime } from "@/lib/format";
+import { postCounts } from "@/lib/posts";
 
 /** `/sys-ops`: the sign-in when signed out, the overview when signed in. */
 export default async function SysOpsPage() {
@@ -46,9 +48,12 @@ export default async function SysOpsPage() {
     );
   }
 
-  const [o, latest] = await Promise.all([
+  const [o, latest, posts, events] = await Promise.all([
     overview(),
     listApplications({ page: 1 }),
+    // content tables may not exist yet on an older install: the overview still loads
+    postCounts().catch(() => null),
+    eventCounts().catch(() => null),
   ]);
   const counts = Object.fromEntries(o.byStatus.map((b) => [b.status, b.n]));
   const cards = [
@@ -104,6 +109,54 @@ export default async function SysOpsPage() {
           </Link>
         ))}
       </dl>
+
+      {posts && events ? (
+        <section aria-labelledby="content">
+          <h2
+            id="content"
+            className="mb-3 font-mono text-overline font-medium text-slate-700 uppercase"
+          >
+            Website content
+          </h2>
+          <dl className="grid grid-cols-2 gap-px border border-navy/15 bg-navy/15 lg:grid-cols-4">
+            {[
+              {
+                label: "Published posts",
+                value: posts.live,
+                href: "/sys-ops/blog",
+              },
+              {
+                label: "Draft posts",
+                value: posts.drafts,
+                href: "/sys-ops/blog",
+              },
+              {
+                label: "Published events",
+                value: events.live,
+                href: "/sys-ops/events",
+              },
+              {
+                label: "Draft events",
+                value: events.drafts,
+                href: "/sys-ops/events",
+              },
+            ].map((c) => (
+              <Link
+                key={c.label}
+                href={c.href}
+                className="flex flex-col gap-1 bg-white p-5 hover:bg-paper"
+              >
+                <dd className="text-[2.5rem] leading-none font-medium tracking-[-0.05em] tabular-nums">
+                  {c.value}
+                </dd>
+                <dt className="font-mono text-overline font-medium text-slate-700 uppercase">
+                  {c.label}
+                </dt>
+              </Link>
+            ))}
+          </dl>
+        </section>
+      ) : null}
 
       <section aria-labelledby="pipeline">
         <h2

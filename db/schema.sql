@@ -69,3 +69,47 @@ CREATE TABLE IF NOT EXISTS applications (
   KEY idx_applications_email (email),
   CONSTRAINT fk_applications_job FOREIGN KEY (job_id) REFERENCES jobs (id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Blog posts: company news and articles. The body is Markdown. `cover` is a web path
+-- (/media/<file> for an upload, or /assets/... for a file shipped with the site).
+-- draft: hidden. published: listed and readable (a future published_at is still shown only once it has passed).
+CREATE TABLE IF NOT EXISTS posts (
+  id           INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  slug         VARCHAR(160) NOT NULL,
+  kind         ENUM('news','article') NOT NULL DEFAULT 'article',
+  title        VARCHAR(200) NOT NULL,
+  excerpt      VARCHAR(400) NOT NULL,
+  body         MEDIUMTEXT   NOT NULL,
+  category     VARCHAR(60)  NULL,
+  cover        VARCHAR(255) NULL,
+  cover_alt    VARCHAR(200) NULL,
+  status       ENUM('draft','published') NOT NULL DEFAULT 'draft',
+  published_at DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  created_at   DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at   DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_posts_slug (slug),
+  KEY idx_posts_list (status, published_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Events: exhibitions, conferences and milestones. `end_date` is for multi-day events.
+-- The optional Markdown body gives an event its own page.
+CREATE TABLE IF NOT EXISTS events (
+  id         INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  slug       VARCHAR(160) NOT NULL,
+  title      VARCHAR(200) NOT NULL,
+  type       VARCHAR(60)  NOT NULL,
+  start_date DATE         NOT NULL,
+  end_date   DATE         NULL,
+  location   VARCHAR(120) NOT NULL,
+  summary    VARCHAR(400) NULL,
+  body       MEDIUMTEXT   NULL,
+  cover      VARCHAR(255) NULL,
+  cover_alt  VARCHAR(200) NULL,
+  status     ENUM('draft','published') NOT NULL DEFAULT 'draft',
+  created_at DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_events_slug (slug),
+  KEY idx_events_list (status, start_date)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

@@ -8,6 +8,8 @@ const nav = [
   { href: "/sys-ops", label: "Overview" },
   { href: "/sys-ops/jobs", label: "Jobs" },
   { href: "/sys-ops/applications", label: "Applications" },
+  { href: "/sys-ops/blog", label: "Blog" },
+  { href: "/sys-ops/events", label: "Events" },
 ];
 
 /** The admin frame: a top bar with the sections, shown only when signed in. The login page stands alone. */

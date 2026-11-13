@@ -35,6 +35,8 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
-## Careers portal
+## Careers, blog and events
 
-The careers pages, the job and application admin area (`/sys-ops`), MySQL, CV storage and email are documented in [docs/careers-portal.md](docs/careers-portal.md).
+The careers pages, the blog and events pages, the admin area (`/sys-ops`), MySQL, CV and picture storage and email are documented in [docs/careers-portal.md](docs/careers-portal.md).
+
+After pulling new changes run `npm run db:setup` (adds any new tables; safe to repeat). On a fresh database also run `npm run db:seed` once to load the starter articles and events.

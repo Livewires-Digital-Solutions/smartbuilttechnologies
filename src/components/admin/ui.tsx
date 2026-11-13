@@ -93,3 +93,31 @@ export function ConfirmSubmit({
     </button>
   );
 }
+
+/** Draft, published, or scheduled (published with a date still to come). */
+export function PublishBadge({
+  status,
+  scheduled,
+}: {
+  status: "draft" | "published";
+  scheduled?: boolean;
+}) {
+  const label =
+    status === "draft" ? "draft" : scheduled ? "scheduled" : "published";
+  const tone =
+    status === "draft"
+      ? "bg-slate-200 text-slate-700"
+      : scheduled
+        ? "bg-orange/15 text-navy"
+        : "bg-navy text-white";
+  return (
+    <span
+      className={cn(
+        "inline-block rounded-[3px] px-2 py-1 font-mono text-overline font-medium uppercase",
+        tone,
+      )}
+    >
+      {label}
+    </span>
+  );
+}
